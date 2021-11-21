@@ -79,6 +79,26 @@ zinit light sindresorhus/pure
 zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
 zinit light tj/git-extras
 
+zinit lucid reset \
+ atclone"[[ -z ${commands[dircolors]} ]] && local P=g
+    \${P}sed -i '/DIR/c\DIR 38;5;63;1' LS_COLORS; \
+    \${P}dircolors -b LS_COLORS > clrs.zsh" \
+ atpull'%atclone' pick"clrs.zsh" nocompile'!' \
+ atload'zstyle ":completion:*:default" list-colors "${(s.:.)LS_COLORS}";' for \
+    trapd00r/LS_COLORS
+
+zinit ice wait as'null' lucid \
+        atclone'./bin/pyenv-virtualenv-init init - > zpyenv-virtualenv.zsh' \
+        atpull'%atclone' src'zpyenv-virtualenv.zsh' nocompile'!' sbin'bin/*'
+    zinit light pyenv/pyenv-virtualenv
+zplugin lucid as'command' pick'bin/pyenv' atinit'export PYENV_ROOT="$PWD"' \
+    atclone'PYENV_ROOT="$PWD" ./libexec/pyenv init - > zpyenv.zsh' \
+    atpull"%atclone" src"zpyenv.zsh" nocompile'!' for \
+        pyenv/pyenv
+        
+zinit ice wait lucid
+zinit light dominik-schwabe/zsh-fnm
+
 # Modern Unix commands
 # See https://github.com/ibraheemdev/modern-unix
 zinit as"null" wait lucid from"gh-r" for \

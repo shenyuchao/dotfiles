@@ -14,16 +14,17 @@ packages=(
     # sudo add-apt-repository -y ppa:kelleyk/emacs
     # emacs26                     # emacs-snapshot
 
-    aspell                      # hunspell
-    parcellite                  # clipit
-    peek
-    screenkey
+    # aspell                      # hunspell
+    # parcellite                  # clipit
+    # peek
+    # screenkey
 
     neofetch                    # screenfetch
+    tmux
 
     # Quick launcher: synapse/albert/Ulauncher
     # sudo add-apt-repository ppa:agornostal/ulauncher
-    ulauncher
+    # ulauncher
 )
 
 # Get OS name

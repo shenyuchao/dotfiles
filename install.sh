@@ -1,6 +1,6 @@
 #!/bin/sh
 #############################################################
-# *Unix dotfiles
+# dotfiles
 # Author: Yuchao Shen <syc2673@gmail.com>
 # URL: https://github.com/shenyuchao/dotfiles
 #############################################################
@@ -209,35 +209,30 @@ chmod +x $DOTFILES/install.sh
 chmod +x $DOTFILES/install_brew_cask.sh
 chmod +x $DOTFILES/`install_go`.sh
 
-ln -sf $DOTFILES/.zshenv $HOME/.zshenv
-ln -sf $DOTFILES/.zshrc $HOME/.zshrc
-ln -sf $DOTFILES/.vimrc $HOME/.vimrc
-ln -sf $DOTFILES/.tmux.conf.local $HOME/.tmux.conf.local
+ln -sf $DOTFILES/zsh/.zshenv $HOME/.zshenv
+ln -sf $DOTFILES/zsh/.zshrc $HOME/.zshrc
+ln -sf $DOTFILES/zsh/.zshrc.local $HOME/.zshrc.local
+ln -sf $DOTFILES/tmux/.tmux.conf $HOME/.tmux.conf
+ln -sf $DOTFILES/tmux/.tmux.conf.local $HOME/.tmux.conf.local
 ln -sf $DOTFILES/.markdownlintrc $HOME/.markdownlintrc
 
-cp -n $DOTFILES/.npmrc $HOME/.npmrc
-cp -n $DOTFILES/.gemrc $HOME/.gemrc
-mkdir -p $HOME/.cargo && cp -n $DOTFILES/cargo.config $HOME/.cargo/config
-cp -n $DOTFILES/.zshrc.local $HOME/.zshrc.local
-mkdir -p $HOME/.pip; cp -n $DOTFILES/.pip.conf $HOME/.pip/pip.conf
+ln -sf $DOTFILES/node/.npmrc $HOME/.npmrc
+ln -sf $DOTFILES/ruby/.gemrc $HOME/.gemrc
+mkdir -p $HOME/.cargo && cp -n $DOTFILES/rust/cargo.config $HOME/.cargo/config
+mkdir -p $HOME/.pip; cp -n $DOTFILES/python/.pip.conf $HOME/.pip/pip.conf
 
-ln -sf $DOTFILES/.gitignore_global $HOME/.gitignore_global
-ln -sf $DOTFILES/.gitconfig_global $HOME/.gitconfig_global
 if is_mac; then
-    cp -n $DOTFILES/.gitconfig_macOS $HOME/.gitconfig
+    cp -n $DOTFILES/git/.gitconfig $HOME/.gitconfig
 elif is_cygwin; then
-    cp -n $DOTFILES/.gitconfig_cygwin $HOME/.gitconfig
+    cp -n $DOTFILES/git/.gitconfig $HOME/.gitconfig
 else
-    cp -n $DOTFILES/.gitconfig_linux $HOME/.gitconfig
-fi
-
-if is_cygwin; then
-    ln -sf $DOTFILES/.minttyrc $HOME/.minttyrc
+    cp -n $DOTFILES/git/.gitconfig $HOME/.gitconfig
 fi
 
 # NVIM Configs
 printf "${GREEN}▓▒░ Installing NVIM Nvchad...${NORMAL}\n"
 sync_repo NvChad/NvChad $NVIM
+ln -sf $DOTFILES/vim/nvchad $NVIM/lua/custom
 
 # Oh My Tmux
 printf "${GREEN}▓▒░ Installing Oh My Tmux...${NORMAL}\n"

@@ -15,6 +15,20 @@ export PATH=$HOME/.zinit/polaris/bin:$PATH
 # Cask
 export PATH=$HOME/.cask/bin:$PATH
 
+# Default's Apps
+export EDITOR="nvim"
+# export READER="zathura"
+export VISUAL="nvim"
+# export TERMINAL="iterm2"
+# export BROWSER="brave"
+# export VIDEO="mpv"
+# export IMAGE="sxiv"
+# export COLORTERM="truecolor"
+# export OPENER="xdg-open"
+# export PAGER="less"
+# export WM="bspwm"
+
+
 # Golang
 export GO111MODULE=auto
 export GOPROXY=https://goproxy.cn # https://athens.azurefd.net
