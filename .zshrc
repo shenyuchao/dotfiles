@@ -2,7 +2,6 @@
 
 # vars
 DOTFILES=$HOME/.dotfiles
-# EMACSD=$HOME/.emacs.d
 NVIM=$HOME/.nvim
 NVIMC=$HOME/.nvim/lua/custom
 
@@ -83,9 +82,9 @@ zinit light tj/git-extras
 # Modern Unix commands
 # See https://github.com/ibraheemdev/modern-unix
 zinit as"null" wait lucid from"gh-r" for \
-      atload"alias cat='bat -p --wrap character'" cp"**/bat.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/bat.zsh -> $ZINIT[COMPLETIONS_DIR]/_bat" sbin"**/bat" @sharkdp/bat \
-      atload"alias ls='exa --group-directories-first'; alias la='ls -laFh'" cp"**/exa.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/exa.zsh -> $ZINIT[COMPLETIONS_DIR]/_exa" sbin"**/exa" ogham/exa \
-      cp"**/fd.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/_fd -> $ZINIT[COMPLETIONS_DIR]" sbin"**/fd" @sharkdp/fd \
+      atload"alias cat='bat -p --wrap character'" cp"**/bat.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/bat.zsh -> $ZINIT[COMPLETIONS_DIR]/_bat" sbin"**/bat" sharkdp/bat \
+      atload"alias ls='lsd'; alias la='ls -laFh'" cp"**/lsd.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/_lsd -> $ZINIT[COMPLETIONS_DIR]/_lsd" sbin"**/lsd" Peltoche/lsd \
+      cp"**/fd.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/_fd -> $ZINIT[COMPLETIONS_DIR]" sbin"**/fd" sharkdp/fd \
       cp"**/doc/rg.1 -> $ZPFX/share/man/man1" mv"**/complete/_rg -> $ZINIT[COMPLETIONS_DIR]" sbin"**/rg" BurntSushi/ripgrep \
       mv"**/completion/_btm -> $ZINIT[COMPLETIONS_DIR]" atload"alias top=btm" sbin"**/btm" ClementTsang/bottom \
       atload"alias help=cheat" mv"**/cheat** -> cheat" sbin"**/cheat" cheat/cheat \
@@ -255,15 +254,6 @@ if [[ $OSTYPE == darwin* ]]; then
 else
     ((! $+commands[exa] )) && alias ls='ls --color=tty --group-directories-first'
 fi
-
-# Emacs
-# alias me="emacs -Q -l $EMACSD/init-mini.el" # mini emacs
-# alias mte="emacs -Q -nw -l $EMACSD/init-mini.el" # mini terminal emacs
-# alias e="$EDITOR -n"
-# alias ec="$EDITOR -n -c"
-# alias ef="$EDITOR -c"
-# alias te="$EDITOR -nw"
-# alias rte="$EDITOR -e '(let ((last-nonmenu-event nil) (kill-emacs-query-functions nil)) (save-buffers-kill-emacs t))' && te"
 
 # Upgrade
 alias upgrade_repo='git pull --rebase --stat origin master'

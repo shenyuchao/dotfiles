@@ -203,11 +203,11 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma-continuum/zinit/ma
 
 # Dotfiles
 printf "${GREEN}▓▒░ Installing Dotfiles...${NORMAL}\n"
-sync_repo seagle0128/dotfiles $DOTFILES
+sync_repo shenyuchao/dotfiles $DOTFILES
 
 chmod +x $DOTFILES/install.sh
 chmod +x $DOTFILES/install_brew_cask.sh
-chmod +x $DOTFILES/install_go.sh
+chmod +x $DOTFILES/`install_go`.sh
 
 ln -sf $DOTFILES/.zshenv $HOME/.zshenv
 ln -sf $DOTFILES/.zshrc $HOME/.zshrc

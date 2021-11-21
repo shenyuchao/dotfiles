@@ -24,12 +24,11 @@ export PATH=${GOPATH//://bin:}/bin:$PATH
 # Bat
 export BAT_THEME="TwoDark"
 
-# Composer
+# GOALNG
 export GOPATH=$WORKSPACE/golang
 export GOBIN=$GOPATH/bin
 export GO111MODULE=auto
-export PATH=$PATH:$GOBIN
-export PATH=$PATH:/usr/local/go/bin
+export PATH=/usr/local/go/bin:$GOBIN:$PATH
 export GOPROXY=https://goproxy.cn
 export GOSUMDB=off
 
