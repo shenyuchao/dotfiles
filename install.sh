@@ -8,7 +8,7 @@
 # Variables
 DOTFILES=$HOME/.dotfiles
 NVIM=$HOME/.nvim
-TMUX=$HOME/.tmux
+TMUX=$DOTFILES/tmux
 ZSH=$HOME/.zinit
 
 # Get OS informatio
