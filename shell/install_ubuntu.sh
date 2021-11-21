@@ -1,9 +1,4 @@
 #!/bin/bash
-#############################################################
-# Install and update packages for ubuntu or its derived editions.
-# Author: Vincent Zhang <seagle0128@gmail.com>
-# URL: https://github.com/seagle0128/dotfiles
-#############################################################
 
 # Packages
 packages=(

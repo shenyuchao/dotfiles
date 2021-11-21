@@ -1,9 +1,4 @@
 #!/bin/bash
-#############################################################
-# Install and update go packages
-# Author: Vincent Zhang <seagle0128@gmail.com>
-# URL: https://github.com/seagle0128/dotfiles
-#############################################################
 
 # Get OS name
 SYSTEM=`uname -s`

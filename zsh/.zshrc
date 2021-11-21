@@ -263,7 +263,8 @@ fi
 # alias fd >/dev/null && unalias fd
 
 # General
-alias zshconf="$EDITOR $HOME/.zshrc; $EDITOR $HOME/.zshrc.local"
+alias vz="$EDITOR $HOME/.zshrc; $EDITOR $HOME/.zshrc.local"
+alias rz="source $HOME/.zshenv; source $HOME/.zshrc; source $HOME/.zshrc.local"
 alias h='history'
 alias c='clear'
 

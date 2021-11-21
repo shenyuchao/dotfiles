@@ -8,7 +8,7 @@
 # Variables
 DOTFILES=$HOME/.dotfiles
 NVIM=$HOME/.nvim
-TMUX=$DOTFILES/tmux
+TMUX=$HOME/.tmux
 ZSH=$HOME/.zinit
 
 # Get OS informatio
@@ -150,6 +150,7 @@ clean_dotfiles() {
 
     rm -f $HOME/.gitignore_global $HOME/.gitconfig_global
     rm -f $HOME/.tmux.conf $HOME/.tmux.local
+    touch $HOME/.zshrc # ignore zinit error: not found .zshrc
 }
 
 YES=0
@@ -203,11 +204,11 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma-continuum/zinit/HE
 
 # Dotfiles
 printf "${GREEN}▓▒░ Installing Dotfiles...${NORMAL}\n"
-sync_repo shenyuchao/dotfiles $DOTFILES
+sync_repo shenyuchao/dotfiles $DOTFILES main
 
 chmod +x $DOTFILES/install.sh
 chmod +x $DOTFILES/install_brew_cask.sh
-chmod +x $DOTFILES/`install_go`.sh
+chmod +x $DOTFILES/install_go.sh
 
 ln -sf $DOTFILES/zsh/.zshenv $HOME/.zshenv
 ln -sf $DOTFILES/zsh/.zshrc $HOME/.zshrc
@@ -232,12 +233,13 @@ fi
 # NVIM Configs
 printf "${GREEN}▓▒░ Installing NVIM Nvchad...${NORMAL}\n"
 sync_repo NvChad/NvChad $NVIM
-ln -sf $DOTFILES/vim/nvchad $NVIM/lua/custom
+ln -sf $DOTFILES/vim/nvchad $NVIM/lua/custom main
 
 # Oh My Tmux
 printf "${GREEN}▓▒░ Installing Oh My Tmux...${NORMAL}\n"
 sync_repo gpakosz/.tmux $TMUX
 ln -sf $TMUX/.tmux.conf $HOME/.tmux.conf
+ln -sf $DOTFILES/tmux/.tmux.conf.local $HOME/.tmux.conf.local
 
 # Entering zsh
 printf "Done. Enjoy!\n"
