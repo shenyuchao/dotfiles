@@ -232,8 +232,8 @@ fi
 
 # NVIM Configs
 printf "${GREEN}▓▒░ Installing NVIM Nvchad...${NORMAL}\n"
-sync_repo NvChad/NvChad $NVIM
-ln -sf $DOTFILES/vim/nvchad $NVIM/lua/custom main
+sync_repo NvChad/NvChad $NVIM main
+ln -sf $DOTFILES/vim/nvchad $NVIM/lua/custom
 
 # Oh My Tmux
 printf "${GREEN}▓▒░ Installing Oh My Tmux...${NORMAL}\n"
