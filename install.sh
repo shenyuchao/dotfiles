@@ -7,7 +7,7 @@
 
 # Variables
 DOTFILES=$HOME/.dotfiles
-NVIM=$HOME/.nvim
+NVIM=$HOME/config/nvim
 TMUX=$HOME/.tmux
 ZSH=$HOME/.zinit
 
