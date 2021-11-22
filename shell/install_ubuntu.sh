@@ -72,7 +72,7 @@ function check {
 }
 
 function repo {
-    sudo add-apt-repository ppa:neovim-ppa/stable
+    sudo add-apt-repository ppa:neovim-ppa/stable -y
     sudo $APT update -y
 }
 
