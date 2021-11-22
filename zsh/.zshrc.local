@@ -37,6 +37,7 @@ export EDITOR=nvim
 # Aliases
 alias vi=vim
 alias vim=nvim
+alias sourcetree='open -a SourceTree'
 # alias upgrade_go='$DOTFILES/install_go.sh'
 
 

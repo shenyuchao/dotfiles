@@ -16,6 +16,7 @@ packages=(
 
     neofetch                    # screenfetch
     tmux
+    neovim
 
     # Quick launcher: synapse/albert/Ulauncher
     # sudo add-apt-repository ppa:agornostal/ulauncher
@@ -46,6 +47,12 @@ else
     NORMAL=""
 fi
 
+function cht {
+    sudo curl https://cht.sh/:cht.sh | sudo tee /usr/local/bin/cht
+    sudo chmod +x /usr/local/bin/cht
+    curl https://cheat.sh/:zsh > $ZINIT[COMPLETIONS_DIR]/_cht
+}
+
 function check {
     if ! command -v git >/dev/null 2>&1; then
         echo "${RED}Error: git is not installed${NORMAL}" >&2
@@ -64,6 +71,15 @@ function check {
     fi
 }
 
+function repo {
+    sudo add-apt-repository ppa:neovim-ppa/stable
+    sudo $APT update -y
+}
+
+function tool {
+    cht
+}
+
 function install {
     for p in ${packages[@]}; do
         printf "${BLUE} ➜  Installing ${p}...${NORMAL}\n"
@@ -73,6 +89,8 @@ function install {
 
 function main {
     check
+    repo
+    tool
     install
 }
 
