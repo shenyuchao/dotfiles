@@ -222,13 +222,8 @@ ln -sf $DOTFILES/ruby/.gemrc $HOME/.gemrc
 mkdir -p $HOME/.cargo && cp -n $DOTFILES/rust/cargo.config $HOME/.cargo/config
 mkdir -p $HOME/.pip; cp -n $DOTFILES/python/.pip.conf $HOME/.pip/pip.conf
 
-if is_mac; then
-    cp -n $DOTFILES/git/.gitconfig $HOME/.gitconfig
-elif is_cygwin; then
-    cp -n $DOTFILES/git/.gitconfig $HOME/.gitconfig
-else
-    cp -n $DOTFILES/git/.gitconfig $HOME/.gitconfig
-fi
+cp -n $DOTFILES/git/.gitconfig $HOME/.gitconfig
+cp -n $DOTFILES/git/.gitignore $HOME/.gitignore
 
 # NVIM Configs
 printf "${GREEN}▓▒░ Installing NVIM Nvchad...${NORMAL}\n"
