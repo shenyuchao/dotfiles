@@ -17,6 +17,7 @@ packages=(
     neofetch                    # screenfetch
     tmux
     neovim
+    lua5.3
 
     # Quick launcher: synapse/albert/Ulauncher
     # sudo add-apt-repository ppa:agornostal/ulauncher

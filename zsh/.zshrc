@@ -114,7 +114,7 @@ zinit as"null" wait lucid from"gh-r" for \
       atload"alias du=dust" sbin"**/dust" bootandy/dust \
       atload"alias ping=gping" sbin"**/gping" orf/gping \
       atload"alias ps=procs" sbin"**/procs" dalance/procs \
-      sbin"**/fastgithub" dotnetcore/FastGithub
+      sbin"**/fastgithub" bpick"*x64*" dotnetcore/FastGithub
 
 # Hyperfine: benchmark tool
 zinit ice as"null" wait lucid from"gh-r" sbin"**/hyperfine"
