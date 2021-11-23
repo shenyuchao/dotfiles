@@ -113,7 +113,8 @@ zinit as"null" wait lucid from"gh-r" for \
       atload"unalias duf; alias df=duf" sbin"**/duf" muesli/duf \
       atload"alias du=dust" sbin"**/dust" bootandy/dust \
       atload"alias ping=gping" sbin"**/gping" orf/gping \
-      atload"alias ps=procs" sbin"**/procs" dalance/procs
+      atload"alias ps=procs" sbin"**/procs" dalance/procs \
+      atload"alias github_start='fastgithub start'; github_stop='fastgithub stop'" sbin"**/fastgithub" dotnetcore/FastGithub
 
 # Hyperfine: benchmark tool
 zinit ice as"null" wait lucid from"gh-r" sbin"**/hyperfine"

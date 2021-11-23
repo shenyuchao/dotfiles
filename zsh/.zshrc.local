@@ -37,18 +37,20 @@ export EDITOR=nvim
 # Aliases
 alias vi=vim
 alias vim=nvim
-alias sourcetree='open -a SourceTree'
+alias st='open -a SourceTree'
 # alias upgrade_go='$DOTFILES/install_go.sh'
 
 
 # Proxy
 PROXY=http://127.0.0.1:7890         # ss:1088, vr:8001
 PROXY2=http://127.0.0.1:8123
+GITHUBPROXY=http://127.0.0.1:38457
 SOCK_PROXY=socks5://127.0.0.1:7890  # ss:1086, vr:1081
 NO_PROXY=10.*.*.*,192.168.*.*,*.local,localhost,127.0.0.1
 alias set_polipo_proxy='ps -ef | grep polipo | grep -v grep; [ $? -ne 0 ] && polipo socksParentProxy=192.168.31.1:1082 &'
 alias showproxy='echo "proxy=$http_proxy https_proxy=$https_proxy all_proxy=$all_proxy"'
 alias setproxy='export http_proxy=$PROXY; export https_proxy=$PROXY; export all_proxy=$PROXY; export no_proxy=$NO_PROXY; showproxy'
+alias setgithubproxy='export http_proxy=$GITHUBPROXY; export https_proxy=$GITHUBPROXY; export all_proxy=$GITHUBPROXY; export no_proxy=$NO_PROXY; showproxy'
 alias setproxy2='set_polipo_proxy; export http_proxy=$PROXY2; export https_proxy=$PROXY2; export no_proxy=$NO_PROXY; showproxy'
 alias unsetproxy='export http_proxy=; export https_proxy=; export all_proxy=; export no_proxy=; showproxy'
 alias unsetproxy2=unsetproxy
