@@ -134,6 +134,3 @@ if (( $+commands[go] )); then
         tree -L 1 $GOPATH/pkg/${sysOS:l}_amd64/$1
     }
 fi
-
-# call
-setgithubproxy
