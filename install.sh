@@ -233,6 +233,7 @@ fi
 # NVIM Configs
 printf "${GREEN}▓▒░ Installing NVIM Nvchad...${NORMAL}\n"
 sync_repo NvChad/NvChad $NVIM main
+nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
 ln -sf $DOTFILES/vim/nvchad/* $NVIM/lua/custom/
 
 # Oh My Tmux
