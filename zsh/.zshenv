@@ -59,5 +59,6 @@ export FZF_DEFAULT_OPTS='--height 40% --layout reverse --border --color "border:
 # Rust
 export PATH=$HOME/.cargo/bin:$PATH
 
-# GVM
+# NVM
 export NVM_DIR="$HOME/.nvm"
+export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/mirrors/node/

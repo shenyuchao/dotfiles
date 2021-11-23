@@ -95,7 +95,8 @@ zplugin lucid as'command' pick'bin/pyenv' atinit'export PYENV_ROOT="$PWD"' \
     atclone'PYENV_ROOT="$PWD" ./libexec/pyenv init - > zpyenv.zsh' \
     atpull"%atclone" src"zpyenv.zsh" nocompile'!' for \
         pyenv/pyenv
-        
+
+# NVM node version manage
 zinit ice depth=1 wait lucid
 zinit light lukechilds/zsh-nvm
 
