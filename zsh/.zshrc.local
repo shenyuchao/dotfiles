@@ -52,7 +52,7 @@ NO_PROXY=10.*.*.*,192.168.*.*,*.local,localhost,127.0.0.1
 alias set_polipo_proxy='ps -ef | grep polipo | grep -v grep; [ $? -ne 0 ] && polipo socksParentProxy=192.168.31.1:1082 &'
 alias showproxy='echo "proxy=$http_proxy https_proxy=$https_proxy all_proxy=$all_proxy"'
 alias setproxy='export http_proxy=$PROXY; export https_proxy=$PROXY; export all_proxy=$PROXY; export no_proxy=$NO_PROXY; showproxy'
-alias setgithubproxy='export http_proxy=$GITHUBPROXY; export https_proxy=$GITHUBPROXY; export all_proxy=$GITHUBPROXY; export no_proxy=$NO_PROXY; showproxy'
+alias setgithubproxy='export http_proxy=$GITHUBPROXY; export https_proxy=$GITHUBPROXY; export all_proxy=$GITHUBPROXY; export no_proxy=$NO_PROXY'
 alias setproxy2='set_polipo_proxy; export http_proxy=$PROXY2; export https_proxy=$PROXY2; export no_proxy=$NO_PROXY; showproxy'
 alias unsetproxy='export http_proxy=; export https_proxy=; export all_proxy=; export no_proxy=; showproxy'
 alias unsetproxy2=unsetproxy
@@ -62,6 +62,7 @@ alias toggleproxy2='if [ -n "$http_proxy" ]; then unsetproxy2; else setproxy2; f
 alias set_sock_proxy='export http_proxy=$SOCK_PROXY; export https_proxy=$SOCK_PROXY; all_proxy=$SOCK_PROXY; export no_proxy=$NO_PROXY; showproxy'
 alias unset_sock_proxy=unsetproxy
 alias toggle_sock_proxy='if [ -n "$http_proxy" ]; then unset_sock_proxy; else set_sock_proxy; fi'
+
 
 # Homebrew
 if [[ $OSTYPE == darwin* ]]; then
@@ -133,3 +134,6 @@ if (( $+commands[go] )); then
         tree -L 1 $GOPATH/pkg/${sysOS:l}_amd64/$1
     }
 fi
+
+# call
+setgithubproxy
