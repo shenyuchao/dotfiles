@@ -62,3 +62,6 @@ export PATH=$HOME/.cargo/bin:$PATH
 # NVM
 export NVM_DIR="$HOME/.nvm"
 export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/mirrors/node/
+
+# GVM
+export GO_BINARY_BASE_URL=https://studygolang.com/dl/golang
