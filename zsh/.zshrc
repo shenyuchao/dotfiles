@@ -96,8 +96,8 @@ zplugin lucid as'command' pick'bin/pyenv' atinit'export PYENV_ROOT="$PWD"' \
     atpull"%atclone" src"zpyenv.zsh" nocompile'!' for \
         pyenv/pyenv
         
-zinit ice wait lucid
-zinit light dominik-schwabe/zsh-fnm
+zinit ice depth=1 wait lucid
+zinit light lukechilds/zsh-nvm
 
 # Modern Unix commands
 # See https://github.com/ibraheemdev/modern-unix
