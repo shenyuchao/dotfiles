@@ -2,11 +2,10 @@
 
 # Go packages
 packages=(
-    golang.org/x/tools/gopls
-    golang.org/x/tools/cmd/goimports
+    golang.org/x/tools/...@latest
     honnef.co/go/tools/cmd/staticcheck
 
-    github.com/zmb3/gogetdoc
+    # github.com/zmb3/gogetdoc
     github.com/go-delve/delve/cmd/dlv
     github.com/aarzilli/gdlv
     github.com/josharian/impl
@@ -14,7 +13,7 @@ packages=(
     github.com/fatih/gomodifytags
     github.com/davidrjenni/reftools/cmd/fillstruct
     github.com/google/gops
-    github.com/haya14busa/goplay/cmd/goplay
+    github.com/haya14busa/goplay
 )
 
 # Use colors, but only if connected to a terminal, and that terminal
@@ -51,9 +50,16 @@ function promote_yn() {
 }
 
 function check() {
-    if ! command -v go >/dev/null 2>&1; then
-        echo "${RED}Error: go is not installed${NORMAL}" >&2
-        exit 1
+    if [ ! -e $HOME/.gvm ]; then
+        bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+    fi
+    
+    if ! command -v gol >/dev/null 2>&1; then
+        GOVERSION=`curl -s 'https://go.dev/VERSION?m=text'`
+        printf "${GREEN}▓▒░ Installing  ${GOVERSION}...${NORMAL}\n"
+        gvm install $GOVERSION -B
+        # echo "${RED}Error: go is not installed${NORMAL}" >&2
+        # exit 1
     fi
 }
 

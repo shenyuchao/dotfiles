@@ -57,6 +57,8 @@ export FZF_COMPLETION_TRIGGER='**'
 export FZF_DEFAULT_OPTS='--height 40% --layout reverse --border --color "border:#b877db" --preview="bat {} --color=always"'
 
 # Rust
+export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
+export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
 export PATH=$HOME/.cargo/bin:$PATH
 
 # NVM

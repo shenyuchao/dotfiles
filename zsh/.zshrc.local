@@ -41,6 +41,7 @@ alias st='open -a SourceTree'
 # alias upgrade_go='$DOTFILES/install_go.sh'
 
 [ -s "$HOME/.gvm/scripts/gvm" ] && source "$HOME/.gvm/scripts/gvm"
+[ -s "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 
 
 # Proxy
