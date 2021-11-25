@@ -47,8 +47,8 @@ export GOPROXY=https://goproxy.cn
 export GOSUMDB=off
 
 # Pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
 export PYTHON_BUILD_MIRROR_URL_SKIP_CHECKSUM=1
 export PYTHON_BUILD_MIRROR_URL="https://npm.taobao.org/mirrors/python/"
 
