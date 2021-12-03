@@ -24,12 +24,22 @@
     #       https://github.com/ohmyzsh/ohmyzsh/raw/master/plugins/cargo/_cargo
 
 # Theme
-# Starship (require nerd fonts)
-# zinit ice as"null" wait lucid from"gh-r" sbin"**/starship"
-# zinit light starship/starship
-(( $+commands[starship] )) && eval $(starship init zsh)
-# zinit ice depth=1 atload"!source ~/.p10k.zsh" lucid nocd
-# zinit light romkatv/powerlevel10k
+# Purc
+case `uname -s` in
+    Linux)
+        zinit ice as"null" wait lucid from"gh-r" sbin"**/starship"
+        zinit light starship/starship
+        (( $+commands[starship] )) && eval $(starship init zsh)
+        ;;
+    Darwin)
+        zinit ice depth=1 atload"!source ~/.p10k.zsh" lucid nocd
+        zinit light romkatv/powerlevel10k
+        ;;
+    *)
+        zinit ice pick"async.zsh" src"pure.zsh"
+        zinit light sindresorhus/pure
+        ;;
+esac 
 
 # Env
 export EDITOR=nvim

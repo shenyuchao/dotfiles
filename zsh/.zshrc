@@ -66,8 +66,8 @@ zinit ice wait lucid depth"1"
 zinit light sei40kr/zsh-fast-alias-tips
 
 # Load the pure theme, with zsh-async library that's bundled with it.
-zinit ice pick"async.zsh" src"pure.zsh"
-zinit light sindresorhus/pure
+# zinit ice pick"async.zsh" src"pure.zsh"
+# zinit light sindresorhus/pure
 
 #
 # Utilities

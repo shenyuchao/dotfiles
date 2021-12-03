@@ -213,6 +213,7 @@ chmod +x $DOTFILES/install_go.sh
 ln -sf $DOTFILES/zsh/.zshenv $HOME/.zshenv
 ln -sf $DOTFILES/zsh/.zshrc $HOME/.zshrc
 ln -sf $DOTFILES/zsh/.zshrc.local $HOME/.zshrc.local
+ln -sf $DOTFILES/zsh/.p10k.zsh $HOME/.p10k.zsh
 ln -sf $DOTFILES/tmux/.tmux.conf $HOME/.tmux.conf
 ln -sf $DOTFILES/tmux/.tmux.conf.local $HOME/.tmux.conf.local
 ln -sf $DOTFILES/.markdownlintrc $HOME/.markdownlintrc
