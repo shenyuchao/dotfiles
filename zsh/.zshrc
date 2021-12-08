@@ -45,6 +45,18 @@ zinit wait lucid for \
       OMZP::git \
       OMZP::sudo
 
+zinit wait lucid is-snippet as"completion" for \
+    OMZP::docker/_docker \
+    OMZP::docker-compose/_docker-compose \
+    OMZP::rust/_rust \
+    OMZP::cargo \
+    OMZP::rustup \
+    OMZP::golang \
+    OMZP::cp \
+    OMZP::dash \
+    OMZP::kubectl \
+    OMZP::npm
+
 zinit light-mode for \
       zsh-users/zsh-autosuggestions
 

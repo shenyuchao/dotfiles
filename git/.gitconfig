@@ -24,3 +24,7 @@
   #safecrlf = true
   editor = vi
   #editor = subl -w
+[pull]
+	rebase = false
+[push]
+	default = current
