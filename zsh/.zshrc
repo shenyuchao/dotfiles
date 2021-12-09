@@ -54,6 +54,7 @@ zinit wait lucid is-snippet as"completion" for \
     OMZP::golang \
     OMZP::cp \
     OMZP::dash \
+    OMZP::tmux \
     OMZP::kubectl \
     OMZP::npm
 
