@@ -151,7 +151,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:git-checkout:*' sort false
 zstyle ':completion:*:*:*:*:processes' command 'ps -u $USER -o pid,user,comm -w -w'
 zstyle ':fzf-tab:*' switch-group ',' '.'
-zstyle ':fzf-tab:complete:(cd|ls|exa|bat|cat|emacs|nano|vi|vim|nvim):*' fzf-preview 'exa -1 --color=always $realpath'
+zstyle ':fzf-tab:complete:(cd|ls):*' fzf-preview 'exa -1 --color=always $realpath'
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview \
        '[[ $group == "[process ID]" ]] &&
         if [[ $OSTYPE == darwin* ]]; then
