@@ -217,7 +217,6 @@ ln -sf $DOTFILES/zsh/.p10k.zsh $HOME/.p10k.zsh
 ln -sf $DOTFILES/tmux/.tmux.conf $HOME/.tmux.conf
 ln -sf $DOTFILES/tmux/.tmux.conf.local $HOME/.tmux.conf.local
 ln -sf $DOTFILES/.markdownlintrc $HOME/.markdownlintrc
-ln -sf $DOTFILES/shell/less.sh $HOME/.less
 
 ln -sf $DOTFILES/node/.npmrc $HOME/.npmrc
 ln -sf $DOTFILES/ruby/.gemrc $HOME/.gemrc
