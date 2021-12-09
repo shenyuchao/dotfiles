@@ -160,6 +160,8 @@ zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview \
            ps --pid=$word -o cmd --no-headers -w -w
         fi'
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags '--preview-window=down:3:wrap'
+zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
+zstyle ':fzf-tab:complete:*:*' fzf-preview 'if [ -f $realpath ]; then bat --style=numbers --color=always $realpath; else exa -1 $realpath; fi'
 
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git' || fd --type f --hidden --follow --exclude .git || git ls-tree -r --name-only HEAD || find ."
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
