@@ -147,18 +147,20 @@ zinit light Aloxaf/fzf-tab
 
 zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*:git-checkout:*' sort false
-zstyle ':completion:*:*:*:*:processes' command 'ps -u $USER -o pid,user,comm -w -w'
+zstyle ':fzf-tab:complete:_zlua:*' query-string input
+zstyle ':fzf-tab:complete:kill:argument-rest' fzf-preview 'ps --pid=$word -o cmd --no-headers -w -w'
+zstyle ':fzf-tab:complete:kill:argument-rest' fzf-flags '--preview-window=down:3:wrap'
+zstyle ':fzf-tab:complete:kill:*' popup-pad 0 3
+zstyle ':fzf-tab:complete:(cd|ls):*' fzf-preview 'lsd -1 --color=always $realpath'
+zstyle ':fzf-tab:complete:(cd|ls):*' popup-pad 30 0
+zstyle ":fzf-tab:*" fzf-flags --color=bg+:23
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 zstyle ':fzf-tab:*' switch-group ',' '.'
-zstyle ':fzf-tab:complete:(cd|ls|exa|bat|cat|emacs|nano|vi|vim|nvim):*' fzf-preview 'exa -1 --color=always $realpath'
-zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview \
-       '[[ $group == "[process ID]" ]] &&
-        if [[ $OSTYPE == darwin* ]]; then
-           ps -p $word -o comm="" -w -w
-        elif [[ $OSTYPE == linux* ]]; then
-           ps --pid=$word -o cmd --no-headers -w -w
-        fi'
-zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags '--preview-window=down:3:wrap'
+zstyle ":completion:*:git-checkout:*" sort false
+zstyle ':completion:*' file-sort modification
+zstyle ':fzf-tab:*:*argument-rest*' popup-pad 100 0
+zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
+zstyle ':fzf-tab:complete:*:*' fzf-preview 'less ${(Q)realpath}'
 
 export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git' || fd --type f --hidden --follow --exclude .git || git ls-tree -r --name-only HEAD || find ."
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
