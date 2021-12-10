@@ -67,3 +67,7 @@ export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/mirrors/node
 
 # GVM
 export GO_BINARY_BASE_URL=https://studygolang.com/dl/golang
+
+# Git
+export GIT_TERMINAL_PROMPT=1
+
