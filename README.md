@@ -1,2 +1,3 @@
 # dotfiles
 *unix system dotfiles
+nvim zsh tmux ...
