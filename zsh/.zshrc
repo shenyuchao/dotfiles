@@ -124,7 +124,7 @@ zinit as"null" wait lucid from"gh-r" for \
       mv"**/completion/_btm -> $ZINIT[COMPLETIONS_DIR]" atload"alias top=btm" sbin"**/btm" ClementTsang/bottom \
       atload"alias help=cheat" mv"**/cheat** -> cheat" sbin"**/cheat" cheat/cheat \
       atload"alias diff=delta" sbin"**/delta" dandavison/delta \
-      atload"unalias duf; alias df=duf" sbin"**/duf" muesli/duf \
+      atload"unalias duf; alias df=duf" sbin"**/duf" bpick"*x86_64*" muesli/duf \
       atload"alias du=dust" sbin"**/dust" bootandy/dust \
       atload"alias ping=gping" sbin"**/gping" orf/gping \
       atload"alias ps=procs" sbin"**/procs" dalance/procs \
