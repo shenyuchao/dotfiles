@@ -71,3 +71,9 @@ export GO_BINARY_BASE_URL=https://studygolang.com/dl/golang
 # Git
 # export GIT_TERMINAL_PROMPT=1
 
+# composer
+export COMPOSER_MEMORY_LIMIT=-1
+export PATH=$HOME/.composer/vendor/bin
+
+# bin
+export PATH=$PATH:~/.bin
