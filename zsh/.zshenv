@@ -73,7 +73,7 @@ export GO_BINARY_BASE_URL=https://studygolang.com/dl/golang
 
 # composer
 export COMPOSER_MEMORY_LIMIT=-1
-export PATH=$HOME/.composer/vendor/bin
+export PATH=$HOME/.composer/vendor/bin:$PATH
 
 # bin
-export PATH=$PATH:~/.bin
+export PATH=~/.bin:$PATH
