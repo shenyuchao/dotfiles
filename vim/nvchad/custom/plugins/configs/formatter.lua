@@ -53,13 +53,13 @@ M.setup = function()
             go = {function()
                 return {
                     exe = "gofmt",
-                    args = {" -w ",  vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
+                    args = {" -w ", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
                     stdin = false
                 }
-            end, function ()
+            end, function()
                 return {
-                    exe = "goimports",
-                    args = {" -w ",  vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
+                    exe = "gofumpt",
+                    args = {" -l -w ", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
                     stdin = false
                 }
             end}
