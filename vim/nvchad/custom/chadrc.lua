@@ -142,7 +142,11 @@ M.mappings.plugins = {
 }
 
 -- NvChad included plugin options & overrides
+-- Install plugins
+local userPlugins = require "custom.plugins" -- path to table
+
 M.plugins = {
+    install = userPlugins,
     options = {
         lspconfig = {
             setup_lspconf = "custom.plugins.configs.lsp_installer"
