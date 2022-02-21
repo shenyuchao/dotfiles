@@ -30,10 +30,24 @@ case `uname -s` in
         zinit ice as"null" wait lucid from"gh-r" sbin"**/starship"
         zinit light starship/starship
         (( $+commands[starship] )) && eval $(starship init zsh)
+        alias cat='bat -p --wrap character'
+        alias ls='lsd'; alias la='ls -laFh'
         ;;
     Darwin)
+        # Theme
         zinit ice depth=1 atload"!source ~/.p10k.zsh" lucid nocd
         zinit light romkatv/powerlevel10k
+        # Alias
+        alias cat='bat -p --wrap character'
+        alias ls='lsd'; alias la='ls -laFh'
+        # alias help=cheat
+        # alias diff=delta
+        # unalias duf 
+        # alias df=duf
+        # alias du=dust
+        # alias ping=gping
+        # alias ps=procs
+        # alias top=btm
         ;;
     *)
         zinit ice pick"async.zsh" src"pure.zsh"

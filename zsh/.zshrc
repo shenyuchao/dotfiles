@@ -116,18 +116,18 @@ zinit light lukechilds/zsh-nvm
 # Modern Unix commands
 # See https://github.com/ibraheemdev/modern-unix
 zinit as"null" wait lucid from"gh-r" for \
-      atload"alias cat='bat -p --wrap character'" cp"**/bat.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/bat.zsh -> $ZINIT[COMPLETIONS_DIR]/_bat" sbin"**/bat" @sharkdp/bat \
+      cp"**/bat.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/bat.zsh -> $ZINIT[COMPLETIONS_DIR]/_bat" sbin"**/bat" @sharkdp/bat \
       cp"**/exa.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/exa.zsh -> $ZINIT[COMPLETIONS_DIR]/_exa" sbin"**/exa" ogham/exa \
-      atload"alias ls='lsd'; alias la='ls -laFh'" cp"**/lsd.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/_lsd -> $ZINIT[COMPLETIONS_DIR]/_lsd" sbin"**/lsd" Peltoche/lsd \
+      cp"**/lsd.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/_lsd -> $ZINIT[COMPLETIONS_DIR]/_lsd" sbin"**/lsd" Peltoche/lsd \
       cp"**/fd.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/_fd -> $ZINIT[COMPLETIONS_DIR]" sbin"**/fd" @sharkdp/fd \
       cp"**/doc/rg.1 -> $ZPFX/share/man/man1" mv"**/complete/_rg -> $ZINIT[COMPLETIONS_DIR]" sbin"**/rg" BurntSushi/ripgrep \
-      mv"**/completion/_btm -> $ZINIT[COMPLETIONS_DIR]" atload"alias top=btm" sbin"**/btm" ClementTsang/bottom \
-      atload"alias help=cheat" mv"**/cheat** -> cheat" sbin"**/cheat" cheat/cheat \
-      atload"alias diff=delta" sbin"**/delta" dandavison/delta \
-      atload"unalias duf; alias df=duf" sbin"**/duf" bpick"*x86_64*" muesli/duf \
-      atload"alias du=dust" sbin"**/dust" bootandy/dust \
-      atload"alias ping=gping" sbin"**/gping" orf/gping \
-      atload"alias ps=procs" sbin"**/procs" dalance/procs \
+      mv"**/completion/_btm -> $ZINIT[COMPLETIONS_DIR]" sbin"**/btm" ClementTsang/bottom \
+      mv"**/cheat** -> cheat" sbin"**/cheat" cheat/cheat \
+      sbin"**/delta" dandavison/delta \
+      sbin"**/duf" bpick"*x86_64*" muesli/duf \
+      sbin"**/dust" bootandy/dust \
+      sbin"**/gping" orf/gping \
+      sbin"**/procs" dalance/procs \
       sbin"**/fastgithub" bpick"*x64*" dotnetcore/FastGithub
 
 # Hyperfine: benchmark tool
@@ -311,3 +311,4 @@ alias upgrade_pip="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d
 alias upgrade_pip3="pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U"
 [[ $OSTYPE == darwin* ]] && alias upgrade_brew='/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'; alias upgrade_brew_cask='$DOTFILES/install_brew_cask.sh'
 alias upgrade_zinit='sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma-continuum/zinit/master/doc/install.sh)"; (( $+functions[zinit] )) && zinit update'
+
