@@ -6,9 +6,9 @@
 # fi
 
 # iTerm2 shell integration
-# if test -e "${HOME}/.iterm2_shell_integration.zsh"; then
-#     source "${HOME}/.iterm2_shell_integration.zsh"
-# fi
+if test -e "${HOME}/.iterm2_shell_integration.zsh"; then
+    source "${HOME}/.iterm2_shell_integration.zsh"
+fi
 
 # Plugins
 # zinit wait lucid for \
