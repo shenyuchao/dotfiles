@@ -4,7 +4,23 @@ if not present then
 end
 
 ts_config.setup {
-    ensure_installed = {"lua", "html", "css", "go", "gomod", "typescript"},
+    ensure_installed = {
+        "lua",
+        "vim",
+        "html",
+        "css",
+        "c",
+        "cpp",
+        "cmake",
+        "bash",
+        "dockerfile",
+        "markdown",
+        "go",
+        "javascript",
+        "php",
+        "typescript",
+        "yaml"
+    },
     highlight = {
         enable = true,
         use_languagetree = true

@@ -91,27 +91,20 @@ alias toggle_sock_proxy='if [ -n "$http_proxy" ]; then unset_sock_proxy; else se
 
 # Homebrew
 if [[ $OSTYPE == darwin* ]]; then
-    export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
-
     function set_homebrew_mirror() {
-        export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
+        export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles
 
+        # 替换brew.git:
         cd "$(brew --repo)"
-        git remote set-url origin https://mirrors.ustc.edu.cn/brew.git
+        git remote set-url origin https://mirrors.aliyun.com/homebrew/brew.git
         cd - >/dev/null
 
-        cd "$(brew --repo)"/Library/Taps/homebrew/homebrew-core
-        git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git
+        # 替换homebrew-core.git:
+        cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
+        git remote set-url origin https://mirrors.aliyun.com/homebrew/homebrew-core.git
         cd - >/dev/null
 
-        cd "$(brew --repo)"/Library/Taps/homebrew/homebrew-cask
-        git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git
-        cd - >/dev/null
-
-        cd "$(brew --repo)"/Library/Taps/homebrew/homebrew-cask-versions
-        git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask-versions.git
-        cd - >/dev/null
-
+        # 应用生效
         brew update
     }
 
@@ -122,19 +115,11 @@ if [[ $OSTYPE == darwin* ]]; then
         git remote set-url origin https://github.com/Homebrew/brew.git
         cd - >/dev/null
 
-        cd "$(brew --repo)"/Library/Taps/homebrew/homebrew-core
-        git remote set-url origin https://github.com/Homebrew/homebrew-core
+        cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
+        git remote set-url origin https://github.com/Homebrew/homebrew-core.git
         cd - >/dev/null
 
-        cd "$(brew --repo)"/Library/Taps/homebrew/homebrew-cask
-        git remote set-url origin https://github.com/Homebrew/homebrew-cask
-        cd - >/dev/null
-
-        cd "$(brew --repo)"/Library/Taps/homebrew/homebrew-cask-versions
-        git remote set-url origin https://github.com/Homebrew/homebrew-cask-versions.git
-        cd - >/dev/null
-
-        brew update
+        # brew update
     }
 fi
 

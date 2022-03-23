@@ -1,61 +1,49 @@
-local ok, null_ls = pcall(require, "null-ls")
-
-if not ok then
-   return
-end
-
+local null_ls = require "null-ls"
 local b = null_ls.builtins
 
 local sources = {
-
-   -- JS html css stuff
-   b.formatting.prettierd.with {
-      filetypes = { "html", "json", "markdown", "css", "javascript", "javascriptreact" },
-   },
-   b.diagnostics.eslint.with {
-      command = "eslint_d",
-   },
-
-   -- PHP
-   b.formatting.phpcsfixer.with {
-       filetypes = { "php" },
-       command = "php-cs-fixer",
-       args = { '--no-interaction', '--quiet', 'fix', "$FILENAME" }
-   },
-
-   -- Golang
-   b.formatting.golines.with {
-       filetypes = { "go" },
-       command = "golines",
-       args = {}
-   },
-   b.formatting.goimports.with {
-    filetypes = { "go" },
-    command = "goimports",
-    args = {}
-   },
-   b.formatting.gofmt.with {
-    filetypes = { "go" },
-    command = "gofmt",
-    args = {}
-   },
-
-   -- Lua
+   b.formatting.autopep8,
+   b.formatting.clang_format,
+   b.formatting.cmake_format,
+   b.formatting.codespell,
+   b.formatting.crystal_format,
+   b.formatting.deno_fmt,
+   b.formatting.djlint,
+   b.formatting.eslint_d,
+   b.formatting.fixjson,
+   b.formatting.gofumpt,
+   b.formatting.golines,
+   b.formatting.lua_format,
+   b.formatting.nginx_beautifier,
+   b.formatting.phpcsfixer,
+   b.formatting.prettierd,
    b.formatting.stylua,
-   b.diagnostics.luacheck.with { extra_args = { "--global vim" } },
-
-   -- Shell
    b.formatting.shfmt,
-   b.diagnostics.shellcheck.with { diagnostics_format = "#{m} [#{c}]" },
+   b.diagnostics.golangci_lint,
+   b.diagnostics.codespell,
+   b.diagnostics.cppcheck,
+   b.diagnostics.protoc_gen_lint,
+   b.diagnostics.shellcheck,
+   b.diagnostics.phpcs,
+   b.diagnostics.eslint,
+   b.code_actions.shellcheck,
+   b.hover.dictionary,
 }
 
 local M = {}
 
-M.setup = function(on_attach)
-   null_ls.config {
+M.setup = function()
+   null_ls.setup {
+      debug = true,
       sources = sources,
+
+      -- format on save
+      on_attach = function(client)
+         if client.resolved_capabilities.document_formatting then
+            vim.cmd "autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()"
+         end
+      end,
    }
-   require("lspconfig")["null-ls"].setup { on_attach = on_attach }
 end
 
 return M
