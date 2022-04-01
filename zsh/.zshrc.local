@@ -40,6 +40,7 @@ case `uname -s` in
         # Alias
         alias cat='bat -p --wrap character'
         alias ls='lsd'; alias la='ls -laFh'
+        alias pd='prlctl'
         # alias help=cheat
         # alias diff=delta
         # unalias duf 
@@ -71,6 +72,7 @@ alias st='open -a SourceTree'
 # Proxy
 PROXY=http://127.0.0.1:7890         # ss:1088, vr:8001
 PROXY2=http://127.0.0.1:8123
+PROXY3=http://127.0.0.1:9091
 GITHUBPROXY=http://127.0.0.1:38457
 SOCK_PROXY=socks5://127.0.0.1:7890  # ss:1086, vr:1081
 NO_PROXY=10.*.*.*,192.168.*.*,*.local,localhost,127.0.0.1
@@ -79,8 +81,10 @@ alias showproxy='echo "proxy=$http_proxy https_proxy=$https_proxy all_proxy=$all
 alias setproxy='export http_proxy=$PROXY; export https_proxy=$PROXY; export all_proxy=$PROXY; export no_proxy=$NO_PROXY; showproxy'
 alias setgithubproxy='export http_proxy=$GITHUBPROXY; export https_proxy=$GITHUBPROXY; export all_proxy=$GITHUBPROXY; export no_proxy=$NO_PROXY'
 alias setproxy2='set_polipo_proxy; export http_proxy=$PROXY2; export https_proxy=$PROXY2; export no_proxy=$NO_PROXY; showproxy'
+alias setproxy3='export http_proxy=$PROXY3; export https_proxy=$PROXY3; export no_proxy=$NO_PROXY; showproxy'
 alias unsetproxy='export http_proxy=; export https_proxy=; export all_proxy=; export no_proxy=; showproxy'
 alias unsetproxy2=unsetproxy
+alias unsetproxy3=unsetproxy
 alias kill_polipo_proxy='killall polipo'
 alias toggleproxy='if [ -n "$http_proxy" ]; then unsetproxy; else setproxy; fi'
 alias toggleproxy2='if [ -n "$http_proxy" ]; then unsetproxy2; else setproxy2; fi'
