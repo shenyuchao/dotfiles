@@ -43,12 +43,13 @@ zinit wait lucid for \
       OMZP::extract \
       OMZP::fancy-ctrl-z \
       OMZP::git \
-      OMZP::sudo
+      OMZP::sudo \
+      OMZP::vagrant
 
 zinit wait lucid is-snippet as"completion" for \
     OMZP::docker/_docker \
     OMZP::docker-compose/_docker-compose \
-    OMZP::rust/_rust \
+    OMZP::rust/_rustc \
     OMZP::cargo \
     OMZP::rustup \
     OMZP::golang \

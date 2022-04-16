@@ -58,6 +58,7 @@ esac
 
 # Env
 export EDITOR=nvim
+export VAGRANT_DEFAULT_PROVIDER=vmware_desktop
 
 # Aliases
 alias vi=vim
@@ -73,6 +74,7 @@ alias st='open -a SourceTree'
 PROXY=http://127.0.0.1:7890         # ss:1088, vr:8001
 PROXY2=http://127.0.0.1:8123
 PROXY3=http://127.0.0.1:9091
+PROXY4=https://127.0.0.1:8888
 GITHUBPROXY=http://127.0.0.1:38457
 SOCK_PROXY=socks5://127.0.0.1:7890  # ss:1086, vr:1081
 NO_PROXY=10.*.*.*,192.168.*.*,*.local,localhost,127.0.0.1
@@ -82,6 +84,7 @@ alias setproxy='export http_proxy=$PROXY; export https_proxy=$PROXY; export all_
 alias setgithubproxy='export http_proxy=$GITHUBPROXY; export https_proxy=$GITHUBPROXY; export all_proxy=$GITHUBPROXY; export no_proxy=$NO_PROXY'
 alias setproxy2='set_polipo_proxy; export http_proxy=$PROXY2; export https_proxy=$PROXY2; export no_proxy=$NO_PROXY; showproxy'
 alias setproxy3='export http_proxy=$PROXY3; export https_proxy=$PROXY3; export no_proxy=$NO_PROXY; showproxy'
+alias setproxy4='export http_proxy=$PROXY4; export https_proxy=$PROXY4; export no_proxy=$NO_PROXY; showproxy'
 alias unsetproxy='export http_proxy=; export https_proxy=; export all_proxy=; export no_proxy=; showproxy'
 alias unsetproxy2=unsetproxy
 alias unsetproxy3=unsetproxy
