@@ -62,6 +62,7 @@ export VAGRANT_DEFAULT_PROVIDER=vmware_desktop
 
 # Aliases
 alias vi=vim
+alias nvim=lvim
 alias vim=lvim
 alias st='open -a SourceTree'
 # alias upgrade_go='$DOTFILES/install_go.sh'
