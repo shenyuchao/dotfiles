@@ -57,7 +57,7 @@ case `uname -s` in
 esac 
 
 # Env
-export EDITOR=nvim
+export EDITOR=vim
 export VAGRANT_DEFAULT_PROVIDER=vmware_desktop
 
 # Aliases
