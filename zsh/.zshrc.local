@@ -30,7 +30,7 @@ case `uname -s` in
         zinit ice as"null" wait lucid from"gh-r" sbin"**/starship"
         zinit light starship/starship
         (( $+commands[starship] )) && eval $(starship init zsh)
-        alias cat='bat --paging=never'
+        alias cat='bat --paging=never -p'
         alias ls='lsd'; alias la='ls -laFh'
         ;;
     Darwin)
@@ -38,7 +38,7 @@ case `uname -s` in
         zinit ice depth=1 atload"!source ~/.p10k.zsh" lucid nocd
         zinit light romkatv/powerlevel10k
         # Alias
-        alias cat='bat --paging=never'
+        alias cat='bat --paging=never -p'
         alias ls='lsd'; alias la='ls -laFh'
         alias pd='prlctl'
         # alias help=cheat
