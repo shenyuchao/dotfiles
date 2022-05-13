@@ -64,11 +64,11 @@ export VAGRANT_DEFAULT_PROVIDER=vmware_desktop
 alias vi=vim
 alias vim=nvim
 alias st='open -a SourceTree'
-if (( $+commands[lvim] )); then
-  alias vi=lvim
-  alias vim=lvim
-  alias nvim=lvim
-fi
+# if (( $+commands[lvim] )); then
+#   alias vi=lvim
+#   alias vim=lvim
+#   alias nvim=lvim
+# fi
 # alias upgrade_go='$DOTFILES/install_go.sh'
 
 [ -s "$HOME/.gvm/scripts/gvm" ] && source "$HOME/.gvm/scripts/gvm"
