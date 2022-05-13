@@ -229,7 +229,7 @@ cp -n $DOTFILES/git/.gitignore $HOME/.gitignore
 # NVIM Configs
 printf "${GREEN}▓▒░ Installing NVIM Nvchad...${NORMAL}\n"
 sync_repo NvChad/NvChad $NVIM main
-ln -sf $DOTFILES/vim/nvchad/* $NVIM/lua/custom/
+ln -sf $DOTFILES/vim/nvchad/custom $NVIM/lua/custom/
 nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
 
 # Oh My Tmux
