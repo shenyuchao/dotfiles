@@ -283,7 +283,7 @@ fi
 
 # General
 alias vz="$EDITOR $HOME/.zshrc; $EDITOR $HOME/.zshrc.local"
-alias rz="source $HOME/.zshenv; source $HOME/.zshrc; source $HOME/.zshrc.local"
+alias rzs="source $HOME/.zshenv; source $HOME/.zshrc; source $HOME/.zshrc.local"
 alias h='history'
 alias c='clear'
 

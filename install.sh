@@ -41,18 +41,6 @@ else
     NORMAL=""
 fi
 
-# Check git
-command -v git >/dev/null 2>&1 || {
-    echo "${RED}Error: git is not installed${NORMAL}" >&2
-    exit 1
-}
-
-# Check curl
-command -v curl >/dev/null 2>&1 || {
-    echo "${RED}Error: curl is not installed${NORMAL}" >&2
-    exit 1
-}
-
 # Sync repository
 sync_repo() {
     local repo_uri="$1"
@@ -78,7 +66,12 @@ is_mac()
 
 is_cygwin()
 {
-    [ "$OSTYPE" = "cygwin" ]
+    [ `cat /etc/redhat-release` = "centos" ]
+}
+
+is_centos()
+{
+    command -v yum >/dev/null 2>&1 || command -v dnf >/dev/null 2>&1
 }
 
 is_linux()
@@ -94,36 +87,31 @@ is_arch() {
     command -v yay >/dev/null 2>&1 || command -v pacman >/dev/null 2>&1
 }
 
-sync_brew_package() {
-    if ! command -v brew >/dev/null 2>&1; then
-        echo "${RED}Error: brew is not found${NORMAL}" >&2
-        return 1
-    fi
-
+install_package() {
     if ! command -v ${1} >/dev/null 2>&1; then
-        brew install ${1} >/dev/null
+        if is_mac; then
+            brew install ${1}
+        elif is_debian; then
+            sudo apt-get install -y ${1}
+        elif is_arch; then
+            pacman -Ssu --noconfirm ${1}
+        elif is_cygwin; then
+            apt-cyg install -y ${1}
+        elif is_centos; then
+            yum install -y ${1}
+        fi
     else
-        brew upgrade ${1} >/dev/null
-    fi
-}
-
-sync_apt_package() {
-    if command -v apt-get >/dev/null 2>&1; then
-        sudo apt-get upgrade -y ${1} >/dev/null
-    else
-        echo "${RED}Error: apt and apt-get are not found${NORMAL}" >&2
-        return 1
-    fi
-}
-
-sync_arch_package() {
-    if command -v yay >/dev/null 2>&1; then
-        yay -Ssu --noconfirm ${1} >/dev/null
-    elif command -v pacman >/dev/null 2>&1; then
-        sudo pacman -Ssu --noconfirm ${1} >/dev/null
-    else
-        echo "${RED}Error: pacman and yay are not found${NORMAL}" >&2
-        return 1
+        if is_mac; then
+            brew upgrade ${1}
+        elif is_debian; then
+            sudo apt-get upgrade -y ${1}
+        elif is_arch; then
+            pacman -Ssu --noconfirm ${1}
+        elif is_cygwin; then
+            apt-cyg upgrade -y ${1}
+        elif is_centos; then
+            yum upgrade -y ${1}
+        fi
     fi
 }
 
@@ -165,6 +153,55 @@ promote_yn() {
     esac
 }
 
+# Install Brew/apt-cyg
+if is_mac && ! command -v brew >/dev/null 2>&1; then
+    printf "${GREEN}▓▒░ Installing Homebrew...${NORMAL}\n"
+    # Install homebrew
+    # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    /bin/bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/Homebrew/install@HEAD/install.sh)"
+
+    # Tap cask and cask-upgrade
+    brew tap homebrew/cask
+    brew tap homebrew/cask-versions
+    brew tap homebrew/cask-fonts
+    brew tap buo/cask-upgrade
+
+    # Install GNU utilities
+    brew install coreutils
+elif is_cygwin && ! command -v apt-cyg >/dev/null 2>&1; then
+    printf "${GREEN}▓▒░ Installing Apt-Cyg...${NORMAL}\n"
+    APT_CYG=/usr/local/bin/apt-cyg
+    curl -fsSL https://raw.githubusercontent.com/transcode-open/apt-cyg/master/apt-cyg > $APT_CYG
+    chmod +x $APT_CYG
+fi
+
+# Check git
+if ! command -v git >/dev/null 2>&1; then
+    install_package git
+fi
+
+# Check curl
+if ! command -v curl >/dev/null 2>&1; then
+    install_package curl
+fi
+
+# Check zsh
+if ! command -v zsh >/dev/null 2>&1; then
+    install_package zsh
+fi
+
+if is_mac && ! command -v tree >/dev/null 2>&1; then
+    install_package tree
+fi
+
+# ZSH plugin manager
+printf "${GREEN}▓▒░ Installing Zinit...${NORMAL}\n"
+if ! command -v zinit >/dev/null 2>&1; then
+    sh -c "$(curl -fsSL https://git.io/zinit-install)"
+else
+    zinit self-update
+fi
+
 # Reset configurations
 if [ -d $ZSH ] || [ -d $TMUX ] || [ -d $NVIM ]; then
     promote_yn "Do you want to reset all configurations?" "continue"
@@ -173,42 +210,13 @@ if [ -d $ZSH ] || [ -d $TMUX ] || [ -d $NVIM ]; then
     fi
 fi
 
-# Brew
-if is_mac; then
-    printf "${GREEN}▓▒░ Installing Homebrew...${NORMAL}\n"
-    if ! command -v brew >/dev/null 2>&1; then
-        # Install homebrew
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-        # Tap cask and cask-upgrade
-        brew tap homebrew/cask
-        brew tap homebrew/cask-versions
-        brew tap homebrew/cask-fonts
-        brew tap buo/cask-upgrade
-    fi
-fi
-
-# Apt-Cyg
-if is_cygwin; then
-    printf "${GREEN}▓▒░ Installing Apt-Cyg...${NORMAL}\n"
-    if ! command -v apt-cyg >/dev/null 2>&1; then
-        APT_CYG=/usr/local/bin/apt-cyg
-        curl -fsSL https://raw.githubusercontent.com/transcode-open/apt-cyg/master/apt-cyg > $APT_CYG
-        chmod +x $APT_CYG
-    fi
-fi
-
-# Zsh plugin manager
-printf "${GREEN}▓▒░ Installing Zinit...${NORMAL}\n"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
-
 # Dotfiles
 printf "${GREEN}▓▒░ Installing Dotfiles...${NORMAL}\n"
 sync_repo shenyuchao/dotfiles $DOTFILES main
 
 chmod +x $DOTFILES/install.sh
-chmod +x $DOTFILES/install_brew_cask.sh
-chmod +x $DOTFILES/install_go.sh
+# chmod +x $DOTFILES/install_brew_cask.sh
+# chmod +x $DOTFILES/install_go.sh
 
 ln -sf $DOTFILES/zsh/.zshenv $HOME/.zshenv
 ln -sf $DOTFILES/zsh/.zshrc $HOME/.zshrc
@@ -229,7 +237,7 @@ cp -n $DOTFILES/git/.gitignore $HOME/.gitignore
 # NVIM Configs
 printf "${GREEN}▓▒░ Installing NVIM Nvchad...${NORMAL}\n"
 sync_repo NvChad/NvChad $NVIM main
-ln -sf $DOTFILES/vim/nvchad/custom $NVIM/lua/custom/
+ln -sf $DOTFILES/vim/nvchad/custom $NVIM/lua/custom
 nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
 
 # Oh My Tmux
