@@ -30,7 +30,7 @@ export VISUAL="nvim"
 
 
 # Golang
-export GO111MODULE=auto
+export GO111MODULE=on
 export GOPROXY=https://goproxy.cn # https://athens.azurefd.net
 export GOPATH=$HOME/go
 export PATH=${GOPATH//://bin:}/bin:$PATH
@@ -77,3 +77,6 @@ export PATH=$HOME/.composer/vendor/bin:$PATH
 
 # bin
 export PATH=~/.bin:$PATH
+
+# BREW
+export HOMEBREW_NO_AUTO_UPDATE=true

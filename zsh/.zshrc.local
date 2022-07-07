@@ -137,6 +137,7 @@ if [[ $OSTYPE == darwin* ]]; then
 fi
 
 # Golang
+export GO111MODULE=on
 export GOPROXY=https://goproxy.cn,direct # goproxy.io
 export GOPATH=$WORKSPACE/golang
 if (( $+commands[go] )); then
@@ -159,4 +160,5 @@ if (( $+commands[go] )); then
     }
 fi
 
+[ -f $HOME/.zshrc.dev ] && source $HOME/.zshrc.dev
 setopt no_nomatch
