@@ -66,7 +66,7 @@ is_mac()
 
 is_cygwin()
 {
-    [ `cat /etc/redhat-release` = "centos" ]
+    [ "$OSTYPE" = "cygwin" ]
 }
 
 is_centos()
