@@ -44,24 +44,21 @@ zinit wait lucid for \
       OMZP::fancy-ctrl-z \
       OMZP::git \
       OMZP::sudo \
-      OMZP::vagrant
+      OMZP::vagrant \
+      OMZP::golang \
+      OMZP::cp \
+      OMZP::dash \
+      OMZP::tmux \
+      OMZP::npm \
+      OMZP::kubectl \
+      OMZP::kubectx \
+      OMZP::istioctl \
+      OMZP::ubuntu
 
 zinit wait lucid is-snippet as"completion" for \
     OMZP::docker/_docker \
     OMZP::docker-compose/_docker-compose \
-    OMZP::rust/_rustc \
-    OMZP::cargo \
-    OMZP::rust \
-    OMZP::golang \
-    OMZP::cp \
-    OMZP::dash \
-    OMZP::tmux \
-    OMZP::kubectl \
-    OMZP::npm \
-    OMZP:: kubctl \
-    OMZP:: kubectx \
-    OMZP:: istioctl \
-    OMZP:: ubuntu
+    
 
 zinit light-mode for \
       zsh-users/zsh-autosuggestions
