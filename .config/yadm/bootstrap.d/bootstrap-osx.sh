@@ -2,7 +2,7 @@
 
 system_type=$(uname -s)
 
-if [ "$system_type" = "Linux" ]; then
+if [ "$system_type" = "Darwin" ]; then
 
   # install homebrew if it's missing
   if ! command -v brew >/dev/null 2>&1; then

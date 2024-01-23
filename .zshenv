@@ -9,6 +9,9 @@ export PATH=$HOME/.bin:$HOME/.local/bin:/usr/local/sbin:$PATH
 [[ -d '/opt/homebrew/bin' ]] && export PATH=/opt/homebrew/bin:$PATH
 [[ -d '/opt/homebrew/sbin' ]] && export PATH=/opt/homebrew/sbin:$PATH
 
+# asdf
+[[ -d "$HOME/.asdf/bin" ]] && export PATH="$HOME/.asdf/bin":$PATH
+
 # Working directory
 export WORKSPACE="$HOME/Workspace"
 [[ `uname` != 'Darwin' ]] && export WORKSPACE="$HOME/workspace"
@@ -44,3 +47,7 @@ export HOMEBREW_NO_AUTO_UPDATE=true
 
 # ANSIBLE
 export ANSIBLE_INVENTORY=$HOME/.ansible/hosts
+
+# FZF
+export FZF_COMPLETION_TRIGGER='**'
+export FZF_DEFAULT_OPTS='--layout reverse --border --color "border:#b877db" --preview="if file {} | grep -i 'text'; then bat {}; fi"'

@@ -1,0 +1,29 @@
+install_lazyvim() {
+	mv ~/.config/nvim{,.bak}
+
+	# optional but recommended
+	mv ~/.local/share/nvim{,.bak}
+	mv ~/.local/state/nvim{,.bak}
+	mv ~/.cache/nvim{,.bak}
+
+	git clone https://github.com/LazyVim/starter ~/.config/nvim
+
+	rm -rf ~/.config/nvim/.git
+}
+
+asdf_plugins=("golang" "nodejs" "pnpm" "rust" "php")
+
+install_asdf() {
+	# Install asdf
+	if [ ! -d "$HOME/.asdf" ]; then
+		git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
+	fi
+	. "$HOME/.asdf/asdf.sh"
+	# Install asdf plugins
+	for plugin in "${asdf_plugins[@]}"; do
+		asdf plugin add $plugin
+	done
+}
+
+#install_lazyvim
+install_asdf
