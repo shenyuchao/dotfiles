@@ -1,0 +1,43 @@
+[user]
+	name = chao
+	email = syc2673@gmail.com
+
+[commit]
+    gpgSign = false
+
+[credential]
+    helper = cache --timeout 3600
+
+[core]
+    editor = nvim
+    excludesFile = ~/.config/gitignore.global
+
+[interactive]
+    diffFilter = delta --color-only --highlight-removed
+
+[color]
+    ui = true
+
+[protocol]
+    version = 2
+
+[push]
+    autoSetupRemote = true
+
+[pull]
+    rebase = true
+
+[rebase]
+    autoStash = true
+
+[init]
+    defaultBranch = main
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    external = difft
+
+[pager]
+    difftool = true
