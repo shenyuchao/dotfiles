@@ -55,8 +55,14 @@ zinit wait lucid light-mode depth"1" for \
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
 
 # Theme
-zinit ice depth=1 atload"!source ~/.p10k.zsh" lucid nocd
+if [[ $OSTYPE == darwin* ]]; then
+  zinit ice depth=1 atload"!source ~/.p10k.zsh" lucid nocd
         zinit light romkatv/powerlevel10k
+else
+  zinit ice as"null" wait lucid from"gh-r" sbin"**/starship"
+  zinit light starship/starship
+  (( $+commands[starship] )) && eval $(starship init zsh)  
+fi
 
 #
 # Utilities
