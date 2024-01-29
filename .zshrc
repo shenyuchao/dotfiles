@@ -1,4 +1,5 @@
 # Zsh configuration
+OSTYPE=$(uname -s)
 
 ### Added by Zinit's installer
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -61,7 +62,7 @@ if [[ $OSTYPE == darwin* ]]; then
 else
   zinit ice as"null" wait lucid from"gh-r" sbin"**/starship"
   zinit light starship/starship
-  (( $+commands[starship] )) && eval $(starship init zsh)  
+  (( $+commands[starship] )) && eval "$(starship init zsh)"
 fi
 
 #
