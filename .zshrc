@@ -56,7 +56,7 @@ zinit wait lucid light-mode depth"1" for \
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
 
 # Theme
-if [[ $OSTYPE == darwin* ]]; then
+if [[ $OSTYPE == Darwin* ]]; then
   zinit ice depth=1 atload"!source ~/.p10k.zsh" lucid nocd
         zinit light romkatv/powerlevel10k
 else
@@ -97,7 +97,7 @@ if type brew &>/dev/null; then
 fi
 
 # OS bundles
-if [[ $OSTYPE == darwin* ]]; then
+if [[ $OSTYPE == Darwin* ]]; then
     zinit snippet PZTM::osx
     if (( $+commands[brew] )); then
         alias bu='brew update; brew upgrade; brew cleanup'
