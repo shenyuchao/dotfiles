@@ -2,42 +2,32 @@
 	name = chao
 	email = syc2673@gmail.com
 
-[commit]
-    gpgSign = false
-
-[credential]
-    helper = cache --timeout 3600
-
 [core]
-    editor = nvim
-    excludesFile = ~/.config/gitignore.global
+	excludesfile = ~/.gitignore_global
+	autocrlf = false
+	ignorecase = false
+	safecrlf = warn
+	editor = vi
+	quotepath = false
+	pager = delta
 
 [interactive]
-    diffFilter = delta --color-only --highlight-removed
+	diffFilter = delta --color-only
 
 [color]
-    ui = true
-
-[protocol]
-    version = 2
-
-[push]
-    autoSetupRemote = true
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
 
 [pull]
-    rebase = true
+	rebase = false
 
-[rebase]
-    autoStash = true
+[push]
+	default = current
 
-[init]
-    defaultBranch = main
-
-[merge]
-    conflictstyle = diff3
-
-[diff]
-    external = difft
-
-[pager]
-    difftool = true
+[delta]
+	navigate = true
+  light = fasle
+	line-numbers = true
+	side-by-side = false

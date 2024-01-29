@@ -23,7 +23,7 @@ export VISUAL="nvim"
 # Golang
 export GO111MODULE=on
 export GOPROXY=https://goproxy.cn 
-export GOPATH=$HOME/go
+export GOPATH=$WORKSPACE/golang
 
 # Pyenv
 # export PYENV_ROOT="$HOME/.pyenv"
@@ -47,7 +47,3 @@ export HOMEBREW_NO_AUTO_UPDATE=true
 
 # ANSIBLE
 export ANSIBLE_INVENTORY=$HOME/.ansible/hosts
-
-# FZF
-export FZF_COMPLETION_TRIGGER='**'
-export FZF_DEFAULT_OPTS='--layout reverse --border --color "border:#b877db" --preview="if file {} | grep -i 'text'; then bat {}; fi"'

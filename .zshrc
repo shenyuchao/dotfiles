@@ -29,40 +29,29 @@ zinit for \
 zinit wait lucid for \
       OMZP::colored-man-pages \
       OMZP::cp \
+      OMZP::fzf \
       OMZP::extract \
-      OMZP::fancy-ctrl-z \
       OMZP::git \
+      OMZP::laravel \
+      OMZP::kubectl \
+      OMZP::fancy-ctrl-z \
+      OMZP::kind \
+      OMZP::asdf \
       OMZP::sudo
 
 # Completion enhancements
 
 # FZF: fuzzy finderls
-if [[ $OSTYPE == darwin* ]]; then
-    FZF="$(brew --prefix)/opt/fzf/shell"
-elif (( $+commands[apt-get] )); then
-    FZF="/usr/share/doc/fzf/examples"
-else
-    FZF="/usr/share/fzf"
-fi
-
-if [[ -f "$FZF/completion.zsh" ]]; then
-    source "$FZF/completion.zsh"
-fi
-
-if [[ -f "$FZF/key-bindings.zsh" ]]; then
-    source "$FZF/key-bindings.zsh"
-fi
 zinit wait lucid light-mode depth=1 nocd for \
     atinit'ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay' zdharma-continuum/fast-syntax-highlighting \
-    atload='_zsh_autosuggest_start' zsh-users/zsh-autosuggestions \
-    atload='MODE_CURSOR_VIINS="bar"; vim-mode-cursor-init-hook' softmoth/zsh-vim-mode \
-    Aloxaf/fzf-tab
+    atload='_zsh_autosuggest_start' zsh-users/zsh-autosuggestions 
 
 zinit wait lucid light-mode depth"1" for \
       djui/alias-tips \
       zsh-users/zsh-history-substring-search \
       hlissner/zsh-autopair
 
+# Ignore case
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]} l:|=* r:|=*'
 
 # Theme
@@ -121,6 +110,63 @@ elif [[ $OSTYPE == linux* ]]; then
     fi
 fi
 
+zinit ice wait lucid depth"1" atload"zicompinit; zicdreplay" blockf
+zinit light Aloxaf/fzf-tab
+
+zstyle ':fzf-tab:*' switch-group ',' '.'
+
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:complete:*:options' sort false
+zstyle ':fzf-tab:complete:(cd|ls|lsd|exa|eza|bat|cat|emacs|nano|vi|vim):*' \
+       fzf-preview 'eza -1 --icons --color=always $realpath 2>/dev/null || ls -1 --color=always $realpath'
+zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' \
+	   fzf-preview 'echo ${(P)word}'
+
+# Preivew `kill` and `ps` commands
+zstyle ':completion:*:*:*:*:processes' command 'ps -u $USER -o pid,user,comm -w -w'
+zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview \
+       '[[ $group == "[process ID]" ]] &&
+        if [[ $OSTYPE == darwin* ]]; then
+            ps -p $word -o comm="" -w -w
+        elif [[ $OSTYPE == linux* ]]; then
+            ps --pid=$word -o cmd --no-headers -w -w
+        fi'
+zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags '--preview-window=down:3:wrap'
+zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
+
+# Preivew `git` commands
+zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview \
+	   'git diff $word | delta'
+zstyle ':fzf-tab:complete:git-log:*' fzf-preview \
+	   'git log --color=always $word'
+zstyle ':fzf-tab:complete:git-help:*' fzf-preview \
+	   'git help $word | bat -plman --color=always'
+zstyle ':fzf-tab:complete:git-show:*' fzf-preview \
+	   'case "$group" in
+	"commit tag") git show --color=always $word ;;
+	*) git show --color=always $word | delta ;;
+	esac'
+zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
+	   'case "$group" in
+	"modified file") git diff $word | delta ;;
+	"recent commit object name") git show --color=always $word | delta ;;
+	*) git log --color=always $word ;;
+	esac'
+
+# Privew help
+zstyle ':fzf-tab:complete:(\\|)run-help:*' fzf-preview 'run-help $word'
+zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word'
+
+export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git || git ls-tree -r --name-only HEAD || rg --files --hidden --follow --glob '!.git' || find ."
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS="--height 80% --border --preview 'if file --mime {} | grep -q binary; then echo \"binary file\"; else bat --color=always {} ; fi'"
+export FZF_CTRL_T_OPTS="--preview '(bat --style=numbers --color=always {} || cat {} || tree -NC {}) 2>/dev/null | head -200'"
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --exact"
+export FZF_ALT_C_OPTS="--preview '(eza --tree --icons --level 3 --color=always --group-directories-first {} || tree -NC {} || ls --color=always --group-directories-first {}) 2>/dev/null | head -200'"
+
+
 #
 # Aliases
 #
@@ -171,3 +217,23 @@ fi
 
 # alias
 source $HOME/.config/zsh/aliases.zsh
+# completion
+source $HOME/.config/zsh/completions.zsh
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/homebrew/Caskroom/miniforge/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/homebrew/Caskroom/miniforge/base/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
