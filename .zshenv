@@ -34,6 +34,7 @@ export PYTHON_BUILD_MIRROR_URL="https://npm.taobao.org/mirrors/python/"
 # Rust
 export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
 export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
+[[ -f "$HOME/.cargo/env" ]] && source $HOME/.cargo/env
 
 # composer
 export COMPOSER_MEMORY_LIMIT=-1
