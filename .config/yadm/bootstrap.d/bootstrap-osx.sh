@@ -3,7 +3,6 @@
 system_type=$(uname -s)
 
 if [ "$system_type" = "Darwin" ]; then
-
   # install homebrew if it's missing
   if ! command -v brew >/dev/null 2>&1; then
     echo "Installing homebrew"
@@ -14,5 +13,10 @@ if [ "$system_type" = "Darwin" ]; then
     echo "Updating homebrew bundle"
     brew bundle --global
   fi
+
+  # install gvm
+  xcode-select --install
+  brew update
+  brew install mercurial
 
 fi

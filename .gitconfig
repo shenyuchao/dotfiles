@@ -1,6 +1,6 @@
 [user]
-	name = chao
-	email = syc2673@gmail.com
+	name = syc31354
+	email = shenyuchao@offcn.com
 
 [core]
 	excludesfile = ~/.gitignore_global
@@ -31,3 +31,11 @@
   light = fasle
 	line-numbers = true
 	side-by-side = false
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[url "ssh://git@gitlab.eoffcn.com/"]
+	insteadOf = https://gitlab.eoffcn.com/

@@ -33,11 +33,10 @@ zinit wait lucid for \
       OMZP::fzf \
       OMZP::extract \
       OMZP::git \
-      OMZP::laravel \
+      OMZP::composer \
       OMZP::kubectl \
       OMZP::fancy-ctrl-z \
       OMZP::kind \
-      OMZP::asdf \
       OMZP::sudo
 
 # Completion enhancements
@@ -238,9 +237,18 @@ else
     if [ -f "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh" ]; then
         . "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh"
     else
-        export PATH="/opt/homebrew/Caskroom/miniforge/base/bin:$PATH"
+        export PATH="$PATH:/opt/homebrew/Caskroom/miniforge/base/bin"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+#
+# java version manager
+if [ -d "$HOME/.jenv/bin" ]; then
+  export PATH="$HOME/.jenv/bin:$PATH"
+  eval "$(jenv init -)"
+fi
 
+
+
+[[ -s "/Users/shenyuchao/.gvm/scripts/gvm" ]] && source "/Users/shenyuchao/.gvm/scripts/gvm"
