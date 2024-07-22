@@ -1,9 +1,9 @@
 [user]
-	name = syc31354
-	email = shenyuchao@offcn.com
+	name = shenyuchao
+	email = syc2673@gmail.com
 
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesfile = /Users/shenyuchao/.gitignore_global
 	autocrlf = false
 	ignorecase = false
 	safecrlf = warn
@@ -22,6 +22,7 @@
 
 [pull]
 	rebase = false
+	default = current
 
 [push]
 	default = current
@@ -39,3 +40,5 @@
 	trustExitCode = true
 [url "ssh://git@gitlab.eoffcn.com/"]
 	insteadOf = https://gitlab.eoffcn.com/
+[commit]
+	template = /Users/shenyuchao/.stCommitMsg

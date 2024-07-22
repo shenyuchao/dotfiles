@@ -4,10 +4,6 @@ export TERM=xterm-256color
 export DEFAULT_USER=$USER
 export EDITOR=nvim
 
-# Brew
-[[ -d '/opt/homebrew/bin' ]] && export PATH=/opt/homebrew/bin:$PATH
-[[ -d '/opt/homebrew/sbin' ]] && export PATH=/opt/homebrew/sbin:$PATH
-
 export PATH=$HOME/.bin:$HOME/.local/bin:/usr/local/sbin:$PATH
 
 # Working directory
@@ -43,3 +39,8 @@ export HOMEBREW_NO_AUTO_UPDATE=true
 
 # ANSIBLE
 export ANSIBLE_INVENTORY=$HOME/.ansible/hosts
+export XDG_DATA_HOME=$HOME/.local/share
+
+# fnm
+export FNM_DIR="$HOME/.local/share/fnm"
+. "$HOME/.cargo/env"

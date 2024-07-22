@@ -1,6 +1,10 @@
 # Zsh configuration
 OSTYPE=$(uname -s)
 
+# Brew
+[[ -d '/opt/homebrew/bin' ]] && export PATH=/opt/homebrew/bin:$PATH
+[[ -d '/opt/homebrew/sbin' ]] && export PATH=/opt/homebrew/sbin:$PATH
+
 ### Added by Zinit's installer
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
@@ -33,10 +37,15 @@ zinit wait lucid for \
       OMZP::fzf \
       OMZP::extract \
       OMZP::git \
+      OMZP::git-flow \
       OMZP::composer \
       OMZP::kubectl \
       OMZP::fancy-ctrl-z \
       OMZP::kind \
+      OMZP::ansible \
+      OMZP::aws \
+      OMZP::tmux \
+      OMZP::brew \
       OMZP::sudo
 
 # Completion enhancements
@@ -80,13 +89,6 @@ fi
 # Git extras
 zinit ice wait lucid as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX" if'(( $+commands[make] ))'
 zinit light tj/git-extras
-
-# Prettify ls
-if (( $+commands[gls] )); then
-    alias ls='gls --color=tty --group-directories-first'
-else
-    alias ls='ls --color=tty --group-directories-first'
-fi
 
 # Homebrew completion
 if type brew &>/dev/null; then
@@ -163,7 +165,6 @@ zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
 
 # Privew help
 zstyle ':fzf-tab:complete:(\\|)run-help:*' fzf-preview 'run-help $word'
-zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word'
 
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git || git ls-tree -r --name-only HEAD || rg --files --hidden --follow --glob '!.git' || find ."
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -171,11 +172,6 @@ export FZF_DEFAULT_OPTS="--height 80% --border --preview 'if file --mime {} | gr
 export FZF_CTRL_T_OPTS="--preview '(bat --style=numbers --color=always {} || cat {} || tree -NC {}) 2>/dev/null | head -200'"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --exact"
 export FZF_ALT_C_OPTS="--preview '(eza --tree --icons --level 3 --color=always --group-directories-first {} || tree -NC {} || ls --color=always --group-directories-first {}) 2>/dev/null | head -200'"
-
-
-#
-# Aliases
-#
 
 # General
 alias cz="$EDITOR $HOME/.zshrc"
@@ -194,17 +190,18 @@ elif (( $+commands[exa] )); then
     alias tree='ls --tree'
 fi
 
-(( $+commands[bat] )) && alias cat='bat -p --wrap character'
-(( $+commands[fd] )) && alias find=fd
-(( $+commands[btm] )) && alias top=btm
-(( $+commands[rg] )) && alias grep=rg
-(( $+commands[tldr] )) && alias help=tldr
-(( $+commands[delta] )) && alias diff=delta
-(( $+commands[duf] )) && alias df=duf
-(( $+commands[dust] )) && alias du=dust
-(( $+commands[hyperfine] )) && alias benchmark=hyperfine
-(( $+commands[gping] )) && alias ping=gping
-(( $+commands[difft] )) && alias diff=difft
+# (( $+commands[bat] )) && alias cat='bat -p --wrap character'
+# (( $+commands[fd] )) && alias find=fd
+# (( $+commands[btm] )) && alias top=btm
+# (( $+commands[rg] )) && alias grep=rg
+# (( $+commands[tldr] )) && alias help=tldr
+# (( $+commands[delta] )) && alias diff=delta
+# (( $+commands[duf] )) && alias df=duf
+# (( $+commands[dust] )) && alias du=dust
+# (( $+commands[hyperfine] )) && alias benchmark=hyperfine
+# (( $+commands[gping] )) && alias ping=gping
+# (( $+commands[difft] )) && alias diff=difft
+(( $+commands[trash] )) && alias rm=trash
 
 # Proxy
 PROXY=http://127.0.0.1:7890         # ss:1088, vr:8001
@@ -230,25 +227,28 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/homebrew/Caskroom/miniforge/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh" ]; then
-        . "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh"
+    if [ -f "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh"
     else
-        export PATH="$PATH:/opt/homebrew/Caskroom/miniforge/base/bin"
+        export PATH="/opt/homebrew/Caskroom/miniconda/base/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 #
 # java version manager
-if [ -d "$HOME/.jenv/bin" ]; then
-  export PATH="$HOME/.jenv/bin:$PATH"
+if [ -d "$HOME/.jenv/shims" ]; then
+  export PATH="$HOME/.jenv/shims:$PATH"
   eval "$(jenv init -)"
+  export JAVA_HOME="$(jenv javahome)"
 fi
 
-
-
 [[ -s "/Users/shenyuchao/.gvm/scripts/gvm" ]] && source "/Users/shenyuchao/.gvm/scripts/gvm"
+
+# fnm
+export PATH="/Users/shenyuchao/.fnm:$PATH"
+eval "`fnm env --use-on-cd`"
