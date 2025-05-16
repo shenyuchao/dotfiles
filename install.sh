@@ -1,13 +1,14 @@
 #!/bin/sh
 #############################################################
 # Set development environment on Linux/macOS/Cygwin quickly.
-# Author: Vincent Zhang <seagle0128@gmail.com>
-# URL: https://github.com/seagle0128/dotfiles
+# Author: Yuchao Shen <syc2673@gmail.com>
+# URL: https://github.com/shenyuchao/dotfiles
 #############################################################
 
 # Variables
 DOTFILES=$HOME/.dotfiles
-EMACSD=$HOME/.emacs.d
+# EMACSD=$HOME/.emacs.d
+NVIMD=$HOME/.config/nvim
 TMUX=$HOME/.tmux
 ZSH=$HOME/.local/share/zinit
 
@@ -135,7 +136,11 @@ clean_dotfiles() {
         mv $HOME/.config/starship.toml $HOME/.config/starship.toml.bak
     fi
 
-    [ -d $EMACSD ] && mv $EMACSD $EMACSD.bak
+    [ -d $NVIMD ] && mv $NVIMD $NVIMD.bak
+
+    mv ~/.local/share/nvim{,.bak}
+    mv ~/.local/state/nvim{,.bak}
+    mv ~/.cache/nvim{,.bak}
 
     rm -rf $ZSH $TMUX $DOTFILES
     rm -rf $HOME/.pip
@@ -219,7 +224,7 @@ sh -c "$(curl -fsSL https://git.io/zinit-install)"
 
 # Dotfiles
 printf "${GREEN}▓▒░ Installing Dotfiles...${NORMAL}\n"
-sync_repo seagle0128/dotfiles $DOTFILES
+sync_repo shenyuchao/dotfiles $DOTFILES
 
 ln -sf $DOTFILES/.zshenv $HOME/.zshenv
 ln -sf $DOTFILES/.zshrc $HOME/.zshrc
@@ -250,8 +255,13 @@ if is_cygwin; then
 fi
 
 # Emacs Configurations
-printf "${GREEN}▓▒░ Installing Centaur Emacs...${NORMAL}\n"
-sync_repo seagle0128/.emacs.d $EMACSD
+# printf "${GREEN}▓▒░ Installing Centaur Emacs...${NORMAL}\n"
+# sync_repo shenyuchao/.emacs.d $EMACSD
+
+# Lazyvim
+printf "${GREEN}▓▒░ Installing Lazyvim...${NORMAL}\n"
+sync_repo LazyVim/starter $NVIMD main
+rm -rf $NVIMD/.git
 
 # Oh My Tmux
 printf "${GREEN}▓▒░ Installing Oh My Tmux...${NORMAL}\n"

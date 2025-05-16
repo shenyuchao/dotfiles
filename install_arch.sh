@@ -1,8 +1,8 @@
 #!/bin/bash
 #############################################################
 # Install packages for Archlinux or its derived editions (e.g. Manjaro).
-# Author: Vincent Zhang <seagle0128@gmail.com>
-# URL: https://github.com/seagle0128/dotfiles
+# Author: Yuchao Shen <syc2673@gmail.com>
+# URL: https://github.com/shenyuchao/dotfiles
 #############################################################
 
 # Packages

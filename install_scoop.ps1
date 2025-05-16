@@ -1,7 +1,7 @@
 #############################################################
 # Install and update scoop packages on Windows
-# Author: Vincent Zhang <seagle0128@gmail.com>
-# URL: https://github.com/seagle0128/dotfiles
+# Author: Yuchao Shen <syc2673@gmail.com>
+# URL: https://github.com/shenyuchao/dotfiles
 #############################################################
 
 # Packages
