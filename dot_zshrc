@@ -1,0 +1,22 @@
+# Load Zinit
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing Zinit…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone --depth=1 https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git"
+fi
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# Load plugins
+source "$XDG_CONFIG_HOME/zsh/plugins.zsh"
+
+# Load aliases
+source "$XDG_CONFIG_HOME/zsh/aliases.zsh"
+
+# Load Powerlevel10k theme
+[[ ! -f "$HOME/.p10k.zsh" ]] || source "$HOME/.p10k.zsh"
+
+# Load local customizations
+[[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
+

@@ -1,0 +1,11 @@
+[tools]
+node = "20"
+pnpm = "latest"
+uv = "latest"
+rust = "latest"
+python = ["3.11.6"]
+lua = ["5.4", "5.1"]
+go = ["1.24", "1.23"]
+"ubi:adwinying/php" = "8.2"
+"ubi:composer/composer" = "latest"
+java = ["17", "21"]

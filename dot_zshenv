@@ -1,0 +1,30 @@
+# ZSH Environment Configuration
+
+# XDG Base Directory Specification
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+
+# System environment
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+export TERM=xterm-256color
+export DEFAULT_USER=$USER
+export EDITOR=nvim
+
+# Path configuration
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/sbin:$PATH
+
+# Zinit
+export PATH=$HOME/.local/share/zinit/polaris/bin:$PATH
+
+# Workspace
+export WORKSPACE=$HOME/WORKSPACE
+
+# Development environments
+# Golang
+export GO111MODULE=auto
+export GOPROXY=https://goproxy.io,direct
+export GOPATH=$WORKSPACE/golang
+export PATH=${GOPATH//://bin:}/bin:$PATH

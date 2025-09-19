@@ -1,0 +1,45 @@
+[core]
+    excludesfile = ~/.gitignore_global
+    autocrlf = false
+    ignorecase = false
+    safecrlf = warn
+    editor = nvim
+    quotepath = false
+	pager = delta
+
+[interactive]
+	  diffFilter = delta --color-only
+
+[color]
+    branch = auto
+    diff = auto
+    interactive = auto
+    status = auto
+
+[pull]
+    rebase = false
+
+[push]
+    default = current
+
+[delta]
+	  navigate = true
+    line-numbers = true
+    side-by-side = true
+
+[merge]
+	conflictStyle = zdiff3
+
+[diff]
+    colorMoved = default
+
+[credential]
+	helper = osxkeychain
+
+[user]
+	name = shenyuchao
+	email = shenyuchao@kiwiing.com
+
+[github]
+	user =
+	oauth-token =
