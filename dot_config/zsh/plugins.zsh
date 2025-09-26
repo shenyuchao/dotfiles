@@ -30,6 +30,7 @@ zinit wait lucid for \
       OMZP::docker-compose \
       OMZP::extract \
       OMZP::fnm \
+      OMZP::chezmoi \
       OMZP::uv \
       OMZP::ansible \
       OMZP::fancy-ctrl-z

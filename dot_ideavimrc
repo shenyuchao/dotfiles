@@ -1,0 +1,655 @@
+" =============================================================================
+" .ideavimrc - IntelliJ IDEA Vim 插件配置文件
+" =============================================================================
+
+" Leader 键设置（必须在其他映射之前）
+let mapleader = " "
+let maplocalleader = ","
+
+" =============================================================================
+" 基础 VIM 设置
+" =============================================================================
+
+" -----------------------------------------------------------------------------
+" 显示设置
+" -----------------------------------------------------------------------------
+" 显示绝对行号
+set number
+" 显示相对行号
+set relativenumber
+" 显示当前模式
+set showmode
+" 显示正在输入的命令
+set showcmd
+" 高亮当前行
+set cursorline
+" 总是显示状态栏
+set laststatus=2
+
+" -----------------------------------------------------------------------------
+" 搜索设置
+" -----------------------------------------------------------------------------
+" 高亮显示搜索结果
+set hlsearch
+" 增量搜索
+set incsearch
+" 搜索时忽略大小写
+set ignorecase
+" 智能大小写匹配
+set smartcase
+
+" -----------------------------------------------------------------------------
+" 编辑体验设置
+" -----------------------------------------------------------------------------
+" 退格键行为
+set backspace=indent,eol,start
+" 光标跨行移动
+set whichwrap+=<,>,h,l
+" 垂直滚动边距
+set scrolloff=8
+" 水平滚动边距
+set sidescrolloff=15
+
+" -----------------------------------------------------------------------------
+" 折叠和缩进设置
+" -----------------------------------------------------------------------------
+" 基于语法折叠
+set foldmethod=syntax
+" 打开文件时展开所有折叠
+set foldlevelstart=99
+" 使用编辑器默认缩进设置
+
+" -----------------------------------------------------------------------------
+" 文件和编码设置
+" -----------------------------------------------------------------------------
+" 文件编码
+set encoding=utf-8
+" 保存文件编码
+set fileencoding=utf-8
+
+" -----------------------------------------------------------------------------
+" 性能和兼容性设置
+" -----------------------------------------------------------------------------
+" 命令历史记录数量
+set history=1000
+" 撤销级别数量
+set undolevels=1000
+" 启用按键序列超时
+set timeout
+" 按键序列超时时间
+set timeoutlen=1000
+" 按键码超时时间
+set ttimeoutlen=50
+" 宏执行时不重绘
+set lazyredraw
+" 快速终端连接
+set ttyfast
+" 不兼容 Vi 模式
+set nocompatible
+
+" -----------------------------------------------------------------------------
+" 高级编辑功能
+" -----------------------------------------------------------------------------
+" 匹配括号高亮
+set showmatch
+" 括号匹配高亮时间
+set matchtime=2
+" 清空选择模式设置
+set selectmode=
+" 选择模式包含最后一个字符
+set selection=inclusive
+" 块选择模式下允许虚拟编辑
+set virtualedit=block
+
+" -----------------------------------------------------------------------------
+" 窗口和界面设置
+" -----------------------------------------------------------------------------
+" 水平分割窗口在下方打开
+set splitbelow
+" 垂直分割窗口在右侧打开
+set splitright
+" 命令行补全菜单
+set wildmenu
+" 补全模式
+set wildmode=longest:full,full
+
+" -----------------------------------------------------------------------------
+" 视觉和声音设置
+" -----------------------------------------------------------------------------
+" 使用视觉提示
+set visualbell
+" 关闭视觉提示（性能优化）
+set novisualbell
+" 清空视觉提示
+set t_vb=
+
+" =============================================================================
+" IDEAVIM 特定设置
+" =============================================================================
+
+" -----------------------------------------------------------------------------
+" 快捷键处理器设置 (sethandler)
+" -----------------------------------------------------------------------------
+" 设置哪些快捷键由 Vim 处理，哪些由 IDE 处理
+" a:vim = 所有模式都由 Vim 处理
+" a:ide = 所有模式都由 IDE 处理
+" n:vim = 仅普通模式由 Vim 处理
+" i:ide n:vim = 插入模式由 IDE 处理，普通模式由 Vim 处理
+
+" -----------------------------------------------------------------------------
+" 导航和滚动快捷键 - 由 Vim 处理
+" -----------------------------------------------------------------------------
+" 向下滚动半页
+sethandler <C-d> a:vim
+" 向上滚动半页
+sethandler <C-u> a:vim
+" 向下翻页
+sethandler <C-f> a:vim
+" 向上翻页
+sethandler <C-b> a:vim
+" 跳回上一位置
+sethandler <C-o> a:vim
+" 跳到下一位置
+sethandler <C-i> a:vim
+" 向下滚动一行
+sethandler <C-e> a:vim
+" 向上滚动一行
+sethandler <C-y> a:vim
+
+" -----------------------------------------------------------------------------
+" 编辑快捷键 - 混合处理
+" -----------------------------------------------------------------------------
+" Vim: 数字增加 / 插入模式下跳到行首
+sethandler <C-a> a:vim
+" Vim: 向下滚动一行 / 插入模式下跳到行尾
+sethandler <C-e> a:vim
+" Vim: 重做 / 寄存器
+sethandler <C-r> a:vim
+" Vim: 窗口操作
+sethandler <C-w> a:vim
+" IDE: 保存文件
+sethandler <C-s> a:ide
+" IDE: 复制（保持 IDE 行为）
+sethandler <C-c> a:ide
+" IDE: 粘贴（保持 IDE 行为）
+sethandler <C-v> a:ide
+" IDE: 撤销（也可改为 a:vim 使用 Vim 的 u）
+sethandler <C-z> a:ide
+
+" -----------------------------------------------------------------------------
+" Multiple Cursors 相关快捷键 - 全部由 Vim 处理
+" -----------------------------------------------------------------------------
+" 选择下一个相同单词
+sethandler <C-n> a:vim
+" 选择上一个/移除选择
+sethandler <C-p> a:vim
+" 跳过当前选择
+sethandler <C-x> a:vim
+" 选择所有相同单词
+sethandler <A-n> a:vim
+
+" -----------------------------------------------------------------------------
+" 搜索相关快捷键 - 由 Vim 处理
+" -----------------------------------------------------------------------------
+" Vim: 替换
+sethandler <C-h> a:vim
+" Vim: 显示文件信息
+sethandler <C-g> a:vim
+" Vim: 清屏/重绘
+sethandler <C-l> a:vim
+
+" -----------------------------------------------------------------------------
+" Buffer 导航快捷键 - 由 Vim 处理
+" -----------------------------------------------------------------------------
+" Vim: 上一个 buffer (仅普通模式)
+sethandler <S-h> n:vim
+" Vim: 下一个 buffer (仅普通模式)
+sethandler <S-l> n:vim
+
+" -----------------------------------------------------------------------------
+" 代码导航快捷键 - 可选配置
+" -----------------------------------------------------------------------------
+" 这些通常保留给 IDE 处理，因为 IDE 的实现更强大
+" IDE: 跳转到定义
+" sethandler <C-]> a:ide
+" Vim: Escape（某些终端）
+" sethandler <C-[> a:vim
+" IDE: 重命名
+" sethandler <F2> a:ide
+" IDE: 查找下一个
+" sethandler <F3> a:ide
+" IDE: 跳转到源码
+" sethandler <F4> a:ide
+
+" -----------------------------------------------------------------------------
+" IDE 集成功能
+" -----------------------------------------------------------------------------
+" 启用 IDE 智能行连接
+set ideajoin
+" 启用 IDE 书签功能
+set ideamarks
+" 启用 IDE 写入功能 (IdeaVim v2.0+ 不再需要这个设置)
+" set ideawrite=all
+" 重构时保持 Vim 模式
+set idearefactormode=keep
+" 集成 IDE 剪贴板
+set clipboard+=ideaput
+" 在 Normal 模式下自动切换到英文输入法
+set keep-english-in-normal-and-restore-in-insert
+
+" -----------------------------------------------------------------------------
+" 文件类型和语法
+" -----------------------------------------------------------------------------
+" 启用文件类型检测
+filetype plugin indent on
+" 启用语法高亮
+syntax enable
+
+" =============================================================================
+" 插件配置
+" =============================================================================
+
+" -----------------------------------------------------------------------------
+" 内置插件配置
+" -----------------------------------------------------------------------------
+
+" Surround - 包围符号操作
+set surround
+
+" Multiple Cursors - 多光标编辑
+set multiple-cursors
+
+" Multiple Cursors 键位映射
+map <C-n> <Plug>NextWholeOccurrence
+map <C-p> <Plug>RemoveOccurrence
+map <C-x> <Plug>SkipOccurrence
+map <A-n> <Plug>AllWholeOccurrences
+
+" 视觉模式下的映射
+xmap <C-n> <Plug>NextWholeOccurrence
+xmap <C-p> <Plug>RemoveOccurrence
+xmap <C-x> <Plug>SkipOccurrence
+xmap <A-n> <Plug>AllWholeOccurrences
+
+" Commentary - 注释切换
+set commentary
+
+" Argument Text Object - 参数文本对象
+set argtextobj
+
+" Exchange - 文本交换
+set exchange
+
+" Text Object Entire - 整个文件文本对象
+set textobj-entire
+
+" Replace With Register - 寄存器替换
+set ReplaceWithRegister
+
+" ReplaceWithRegister 键位映射
+nmap rs  <Plug>ReplaceWithRegisterOperator
+nmap rss <Plug>ReplaceWithRegisterLine
+xmap rs  <Plug>ReplaceWithRegisterVisual
+
+" Paragraph Motion - 段落移动增强
+set vim-paragraph-motion
+
+" Indent Object - 缩进文本对象
+set textobj-indent
+
+" Highlighted Yank - 复制高亮
+set highlightedyank
+" 注意: IdeaVim 不支持 let g:variable 语法
+" 高亮持续时间使用默认值
+
+" NERDTree - 文件树（集成 IDE 文件树功能）
+set NERDTree
+
+" -----------------------------------------------------------------------------
+" 外部插件配置 - Flash.nvim
+" 需要安装 vim-flash 插件
+" -----------------------------------------------------------------------------
+
+" 搜索跳转
+nmap s <Action>(flash.search)
+xmap s <Action>(flash.search)
+
+" 增强字符查找
+nmap f <Action>(flash.find)
+xmap f <Action>(flash.find)
+nmap F <Action>(flash.find_backward)
+xmap F <Action>(flash.find_backward)
+
+" 增强 till 命令
+nmap t <Action>(flash.till)
+xmap t <Action>(flash.till)
+nmap T <Action>(flash.till_backward)
+xmap T <Action>(flash.till_backward)
+
+" 重复搜索
+nmap ; <Action>(flash.repeat)
+xmap ; <Action>(flash.repeat)
+nmap , <Action>(flash.repeat_backward)
+xmap , <Action>(flash.repeat_backward)
+
+" 语法节点选择
+nmap S <Action>(flash.treesitter)
+xmap S <Action>(flash.treesitter)
+
+" 远程操作
+omap r <Action>(flash.remote)
+
+" =============================================================================
+" 插入模式映射
+" =============================================================================
+
+" -----------------------------------------------------------------------------
+" 插入模式导航
+" -----------------------------------------------------------------------------
+" 跳到行首 (Go to line start)
+imap <C-a> <C-o>^
+" 跳到行尾 (Go to line end)
+imap <C-e> <C-o>$
+
+" =============================================================================
+" LSP 功能键位映射（模拟 LazyVim 配置）
+" =============================================================================
+
+" -----------------------------------------------------------------------------
+" 代码导航
+" -----------------------------------------------------------------------------
+" LazyVim 标准 LSP 导航键
+" 跳转到定义 (Definition)
+nmap gd <Action>(GotoDeclaration)
+" 跳转到声明 (Declaration)
+nmap gD <Action>(GotoDeclaration)
+" 跳转到实现 (Implementation)
+nmap gI <Action>(GotoImplementation)
+" 查看引用 (References)
+nmap gr <Action>(ShowUsages)
+" 跳转到类型定义 (Type Definition)
+nmap gy <Action>(GotoTypeDeclaration)
+
+" 使用 K 显示文档 (Hover)
+" 显示悬浮文档 (Hover)
+nmap K <Action>(QuickJavaDoc)
+" 显示签名帮助 (Signature Help)
+nmap gK <Action>(ParameterInfo)
+
+" -----------------------------------------------------------------------------
+" 诊断和错误 - LazyVim 标准
+" -----------------------------------------------------------------------------
+" 上一个诊断
+nmap [d <Action>(GotoPreviousError)
+" 下一个诊断
+nmap ]d <Action>(GotoNextError)
+" 上一个错误
+nmap [e <Action>(GotoPreviousError)
+" 下一个错误
+nmap ]e <Action>(GotoNextError)
+" 上一个警告
+nmap [w <Action>(GotoPreviousError)
+" 下一个警告
+nmap ]w <Action>(GotoNextError)
+
+" 快速修复列表导航
+" 上一个快速修复项
+nmap [q <Action>(PreviousOccurence)
+" 下一个快速修复项
+nmap ]q <Action>(NextOccurence)
+
+" -----------------------------------------------------------------------------
+" Leader 键映射 - 代码操作
+" -----------------------------------------------------------------------------
+
+" 代码操作 (Code Actions) - LazyVim 风格
+"  代码操作 (Code Action)
+nmap <leader>ca <Action>(ShowIntentionActions)
+"  重命名 (Rename)
+nmap <leader>cr <Action>(RenameElement)
+"  LSP 信息 (LSP Info)
+nmap <leader>cl <Action>(ShowErrorDescription)
+"  格式化代码 (Format)
+nmap <leader>cf <Action>(ReformatCode)
+"  组织导入 (Organize Imports)
+nmap <leader>co <Action>(OptimizeImports)
+"  诊断信息 (Line Diagnostics)
+nmap <leader>cd <Action>(ShowErrorDescription)
+
+" 额外的代码操作
+"  实现方法
+nmap <leader>ci <Action>(ImplementMethods)
+"  提取方法
+nmap <leader>cm <Action>(ExtractMethod)
+"  提取变量
+nmap <leader>cv <Action>(IntroduceVariable)
+"  行注释
+nmap <leader>cc <Action>(CommentByLineComment)
+"  块注释
+nmap <leader>cC <Action>(CommentByBlockComment)
+"  内联
+nmap <leader>cn <Action>(Inline)
+
+" 生成代码
+"  生成代码菜单
+nmap <leader>cg <Action>(Generate)
+"  生成 Getter
+nmap <leader>cG <Action>(GenerateGetter)
+"  生成 Setter
+nmap <leader>cS <Action>(GenerateSetter)
+"  生成 equals 和 hashCode
+nmap <leader>ce <Action>(GenerateEquals)
+"  生成测试方法
+nmap <leader>ct <Action>(GenerateTestMethod)
+
+" 重构菜单
+"  重构菜单
+nmap <leader>rr <Action>(Refactorings.QuickListPopupAction)
+"  提取方法
+nmap <leader>re <Action>(ExtractMethod)
+"  内联
+nmap <leader>ri <Action>(Inline)
+"  移动
+nmap <leader>rm <Action>(Move)
+"  重命名
+nmap <leader>rn <Action>(RenameElement)
+
+" -----------------------------------------------------------------------------
+" UI 切换 - LazyVim 风格
+" -----------------------------------------------------------------------------
+"  切换全屏
+nmap <leader>uf <Action>(ToggleFullScreen)
+"  切换缩进线
+nmap <leader>uI <Action>(EditorToggleShowIndentLines)
+"  切换行号
+nmap <leader>ul <Action>(EditorToggleShowLineNumbers)
+"  切换自动换行
+nmap <leader>uw <Action>(EditorToggleUseSoftWraps)
+
+" -----------------------------------------------------------------------------
+" 搜索和查找 - LazyVim 风格
+" -----------------------------------------------------------------------------
+" 查找/搜索 (Search)
+"  搜索文本 (Grep)
+nmap <leader>/ <Action>(FindInPath)
+"  搜索所有
+nmap <leader>ss <Action>(SearchEverywhere)
+"  查找文件
+nmap <leader>sf <Action>(GotoFile)
+"  最近文件
+nmap <leader>sF <Action>(RecentFiles)
+"  Grep 文本
+nmap <leader>sg <Action>(FindInPath)
+"  查找类
+nmap <leader>sc <Action>(GotoClass)
+"  查找符号（工作区）
+nmap <leader>sS <Action>(GotoSymbol)
+"  查找符号
+nmap <leader>ss <Action>(GotoSymbol)
+"  查找动作
+nmap <leader>sa <Action>(GotoAction)
+"  查找使用
+nmap <leader>su <Action>(FindUsages)
+"  搜索替换
+nmap <leader>sr <Action>(ReplaceInPath)
+
+" -----------------------------------------------------------------------------
+" 窗口和标签管理 - LazyVim 风格
+" -----------------------------------------------------------------------------
+"  切换窗口
+nmap <leader>ww <Action>(NextSplitter)
+"  删除窗口
+nmap <leader>wd <Action>(Unsplit)
+"  水平分割
+nmap <leader>w- <Action>(SplitHorizontally)
+"  垂直分割
+nmap <leader>w| <Action>(SplitVertically)
+"  水平分割
+nmap <leader>ws <Action>(SplitHorizontally)
+"  垂直分割
+nmap <leader>wv <Action>(SplitVertically)
+"  最大化窗口
+nmap <leader>wm <Action>(MaximizeEditorInSplit)
+"  关闭其他窗口
+nmap <leader>wo <Action>(CloseAllEditorsButActive)
+
+" -----------------------------------------------------------------------------
+" 调试操作 (Debug) - LazyVim 扩展
+" -----------------------------------------------------------------------------
+"  条件断点
+nmap <leader>dB <Action>(ToggleBreakpointCondition)
+"  切换断点
+nmap <leader>db <Action>(ToggleLineBreakpoint)
+"  继续 (Continue)
+nmap <leader>dc <Action>(Resume)
+"  运行到光标
+nmap <leader>dC <Action>(RunToCursor)
+"  跳转到会话
+nmap <leader>dg <Action>(GotoDebuggerSessions)
+"  步入 (Step Into)
+nmap <leader>di <Action>(StepInto)
+"  步出 (Step Out)
+nmap <leader>do <Action>(StepOut)
+"  步过 (Step Over)
+nmap <leader>dO <Action>(StepOver)
+"  暂停程序
+nmap <leader>dp <Action>(PauseProgramAction)
+"  运行最近
+nmap <leader>dr <Action>(ContextDebug)
+"  重新运行
+nmap <leader>dR <Action>(Resume)
+"  开始调试
+nmap <leader>ds <Action>(Debug)
+"  调试会话
+nmap <leader>dS <Action>(Debugger.FocusOnFinish)
+"  运行测试
+nmap <leader>dt <Action>(RunClass)
+"  重新运行测试
+nmap <leader>dT <Action>(RerunTests)
+"  调试窗口
+nmap <leader>dw <Action>(ActivateDebugToolWindow)
+
+" -----------------------------------------------------------------------------
+" Git 操作 - LazyVim 风格
+" -----------------------------------------------------------------------------
+"  Git blame
+nmap <leader>gb <Action>(Annotate)
+"  Git diff
+nmap <leader>gd <Action>(Compare.SameVersion)
+"  Diff 视图
+nmap <leader>gD <Action>(Vcs.ShowDiffWithLocal)
+"  Git 历史
+nmap <leader>gh <Action>(Vcs.ShowTabbedFileHistory)
+"  重置更改
+nmap <leader>gr <Action>(Vcs.RollbackChangedLines)
+"  Git 状态
+nmap <leader>gs <Action>(Vcs.QuickListPopupAction)
+
+" -----------------------------------------------------------------------------
+" 终端操作 (Terminal)
+" -----------------------------------------------------------------------------
+" macOS 下的智能终端切换方案
+" 使用正确的 IntelliJ IDEA Action 名称
+"  显示/聚焦终端
+nmap <leader>ft <Action>(ActivateTerminalToolWindow)
+"  隐藏活动工具窗口（包括终端）
+nmap <leader>fh <Action>(HideActiveToolWindow)
+"  新终端 (当前目录)
+nmap <leader>fT <Action>(Terminal.OpenInTerminal)
+"  显示/聚焦终端
+nmap <C-/> <Action>(ActivateTerminalToolWindow)
+"  备用键
+nmap <C-_> <Action>(ActivateTerminalToolWindow)
+
+" 隐藏工具窗口的快捷键
+"  Shift+Esc 隐藏活动工具窗口
+nmap <S-Esc> <Action>(HideActiveToolWindow)
+"  隐藏活动工具窗口
+nmap <leader>hw <Action>(HideActiveToolWindow)
+"  隐藏所有工具窗口
+nmap <leader>ha <Action>(HideAllWindows)
+
+" 注意：
+" 1. IdeaVim 中的 tmap 可能不完全支持
+" 2. 建议使用 IntelliJ IDEA 的原生快捷键：
+"    - Shift+Esc: 隐藏活动工具窗口
+"    - Cmd+Shift+F12 (macOS): 隐藏所有工具窗口并最大化编辑器
+" 3. 在 Settings -> Tools -> Terminal 中
+"    取消勾选 "Override IDE shortcuts" 可让部分键位生效
+
+" -----------------------------------------------------------------------------
+" Buffer 操作 (Buffers) - LazyVim 风格
+" -----------------------------------------------------------------------------
+" Buffer 导航
+"  上一个 buffer
+nmap <S-h> <Action>(PreviousTab)
+"  下一个 buffer
+nmap <S-l> <Action>(NextTab)
+"  上一个 buffer
+nmap [b <Action>(PreviousTab)
+"  下一个 buffer
+nmap ]b <Action>(NextTab)
+"  Buffer 列表
+nmap <leader>bb <Action>(RecentFiles)
+"  删除 buffer
+nmap <leader>bd <Action>(CloseContent)
+"  删除其他 buffers
+nmap <leader>bD <Action>(CloseAllEditorsButActive)
+"  固定 buffer
+nmap <leader>bp <Action>(PinActiveTab)
+"  删除未固定的 buffers
+nmap <leader>bP <Action>(CloseAllUnpinnedEditors)
+
+" 快速跳转到特定 buffer (使用 Alt+数字键)
+"  跳转到 buffer 1
+nmap <A-1> <Action>(GoToTab1)
+"  跳转到 buffer 2
+nmap <A-2> <Action>(GoToTab2)
+"  跳转到 buffer 3
+nmap <A-3> <Action>(GoToTab3)
+"  跳转到 buffer 4
+nmap <A-4> <Action>(GoToTab4)
+"  跳转到 buffer 5
+nmap <A-5> <Action>(GoToTab5)
+"  跳转到 buffer 6
+nmap <A-6> <Action>(GoToTab6)
+"  跳转到 buffer 7
+nmap <A-7> <Action>(GoToTab7)
+"  跳转到 buffer 8
+nmap <A-8> <Action>(GoToTab8)
+"  跳转到 buffer 9
+nmap <A-9> <Action>(GoToTab9)
+
+" Buffer 操作
+"  新建文件 (新 buffer)
+nmap <leader>fn <Action>(NewFile)
+"  在项目视图中显示当前 buffer
+nmap <leader>` <Action>(SelectInProjectView)
+
+" =============================================================================
+" 调试配置
+" =============================================================================
+
+" 调试时取消注释以下行:
+" set verbose=1
+" set verbosefile=~/.ideavim.log
